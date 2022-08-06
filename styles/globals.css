@@ -1,13 +1,25 @@
+@font-face {
+  font-family: Gilroy-Bold;
+  src: url('/font/Gilroy-ExtraBold.otf');
+}
+@font-face {
+  font-family: Gilroy-Light;
+  src: url('/font/Gilroy-Light.otf');
+}
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  color: #333333;
+  font-family: Gilroy-Light, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
-
+p, div, input, textarea, select, option{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 a {
-  color: inherit;
   text-decoration: none;
 }
 
