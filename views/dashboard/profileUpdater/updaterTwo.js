@@ -73,7 +73,7 @@ const UpdaterTwo = props =>{
                         <FormInputContainer>
                             <FormGroup>
                                 <Label mb="10px">Blood Pressure</Label>
-                                <BPInputContainer error={error} onClick={errorHide} change={changeHandler} value={bloodPressure}/>
+                                <BPInputContainer unit="mmHg" name="bp" placeholder="Blood Pressure" error={error} onClick={errorHide} change={changeHandler} value={bloodPressure}/>
                                 <Hint>Hint : systolic/diastolic</Hint>
                             </FormGroup>
                             
