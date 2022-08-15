@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useRouter } from "next/router"
 export const useMenuDropdown = (id) =>{
     useEffect(() => {
         window.addEventListener('resize', function(){
@@ -141,4 +142,12 @@ const errorDisplay = (error) =>{
 }
 return [error, dayError, monthError, yearError, genderError, heightError, weightError,
   profileFormValidator1, errorHide, errorDisplay, profileInputHandler]
+}
+
+export const useBackBtn = (UserUrl, pageNumber) =>{
+    const router = useRouter()
+    const backBtnHandler = () =>{
+        router.push(`/${UserUrl}/profile-update/${pageNumber}`)  
+    }
+    return backBtnHandler;
 }

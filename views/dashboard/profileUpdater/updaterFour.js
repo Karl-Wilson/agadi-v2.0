@@ -3,7 +3,7 @@ import { useState } from 'react'
 import {PageWrapper, Logo, Button} from '../../../components/core/core'
 import {FormWrapper, Label, Input, Select} from '../../../components/core/form/form'
 import {FormTitleContainer, FormButtonContainer, BPInputContainer, FormInputContainer, FormGroup, InputGroup, DrugEntry} from '../../../components/containers/containers'
-
+import { useBackBtn } from '../../../utils/hooks'
 const Form= styled.form`
 display: flex;
     flex-direction: column;
@@ -17,6 +17,7 @@ const AddBtnContainer = styled.div`
     justify-content: space-between;
 `
 const UpdaterFour = props =>{
+    const backBtnHandler = useBackBtn(props.userUrl, 3)
     const [field, setField] = useState([<DrugEntry/>])
     const addHandler = () =>{
         let fields = field.concat(<DrugEntry/>)
@@ -48,7 +49,7 @@ const UpdaterFour = props =>{
                     </AddBtnContainer>
                     </div>
                     <FormButtonContainer>
-                        <Button Swidth="100%" Lwidth="50px">Back</Button>
+                        <Button Swidth="100%" Lwidth="50px" click={backBtnHandler}>Back</Button>
                         <Button solid>Next</Button>
                     </FormButtonContainer>
                 </Form>

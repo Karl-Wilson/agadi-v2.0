@@ -73,10 +73,10 @@ export const BPInputContainer = props =>{
     return(
         <Wrapper width="300px" error={props.error} onClick={props.onClick}>
             <InputContainer>
-                <Input borderless type="text" name="bp" placeholder="Blood Pressure" onChange={props.change} value={props.value} height="48px"/>
+                <Input borderless type="text" name={props.name} placeholder={props.placeholder} onChange={props.change} value={props.value} height="48px"/>
             </InputContainer>
             <InputSelect>
-                <p>mmHg</p>
+                <p>{props.unit}</p>
             </InputSelect>
         </Wrapper>
     )

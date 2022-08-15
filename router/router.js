@@ -53,7 +53,7 @@ export const useProfileUpdateRouter = () =>{
         break;
         case '3': return <UpdaterThree userUrl={userUrl}/>;
         break;
-        case '4': return <UpdaterFour/>;
+        case '4': return <UpdaterFour userUrl={userUrl}/>;
         break;
         }
 
