@@ -40,7 +40,7 @@ export const useUnitSwitchHandler = (e) =>{
   return [UnitSwitchHandler, unit];
 }
 
-export const useProfileErrorHandler1 = () => {
+export const useProfileFormHandler1 = () => {
   const [error, setError] = useState(false)
   const [dayError, setDayError] = useState(false)
   const [monthError, setMonthError] = useState(false)
@@ -48,6 +48,25 @@ export const useProfileErrorHandler1 = () => {
   const [genderError, setGenderError] = useState(false)
   const [heightError, setHeightError] = useState(false)
   const [weightError, setWeightError] = useState(false)
+
+  const profileInputHandler = (unit) =>{
+    const day = document.querySelector('select[name="day"]').value
+    const month = document.querySelector('select[name="month"]').value
+    const year = document.querySelector('select[name="year"]').value
+    let isGender = document.querySelector('input[name="gender"]:checked')
+    const gender = isGender == null? false : document.querySelector('input[name="gender"]:checked').value
+    let feet, inches, kg, centimeter, pounds
+
+    if(unit == 'imperial'){
+        feet = document.querySelector('input[name="feet"]').value
+        inches = document.querySelector('input[name="inches"]').value
+        kg = document.querySelector('input[name="kg"]').value
+    }else{
+        centimeter = document.querySelector('input[name="centimeter"]').value
+        pounds = document.querySelector('input[name="pounds"]').value
+    }
+    return [gender, feet, inches, kg, centimeter, pounds, day, month, year]
+}
 
   const profileFormValidator1 = (gender, feet, inches, kg, centimeter, pounds, day, month, year, unit) =>{
     let error = [];
@@ -121,5 +140,5 @@ const errorDisplay = (error) =>{
     })
 }
 return [error, dayError, monthError, yearError, genderError, heightError, weightError,
-  profileFormValidator1, errorHide, errorDisplay]
+  profileFormValidator1, errorHide, errorDisplay, profileInputHandler]
 }

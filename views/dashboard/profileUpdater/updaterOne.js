@@ -6,7 +6,7 @@ import { profileUpdateAction } from "../../../store/reducers/profileUpdateReduce
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { dayGenerator, yearGenerator, profileInputHandler } from "../../../utils/helper";
-import { useUnitSwitchHandler, useProfileErrorHandler1 } from "../../../utils/hooks";
+import { useUnitSwitchHandler, useProfileFormHandler1 } from "../../../utils/hooks";
 const Form= styled.form`
 
 `
@@ -37,7 +37,7 @@ const UnitSwitch = styled.div`
 const UpdaterOne = props =>{
     const [UnitSwitchHandler, unit] = useUnitSwitchHandler()
     const [error, dayError, monthError, yearError, genderError, heightError, weightError,
-        profileFormValidator1, errorHide, errorDisplay] = useProfileErrorHandler1()
+        profileFormValidator1, errorHide, errorDisplay, profileInputHandler] = useProfileFormHandler1()
 
     const {addDoB, addGender, addUnitMethod, addHeight,addWeight} = profileUpdateAction
     const day = dayGenerator()
