@@ -10,7 +10,7 @@ const Wrapper = styled.input`
         if(props.error){
             return '0px solid red'
         }
-        return '0px solid #cccccc'}
+        return '1px solid #cccccc'}
     };
     border-radius: 10px;
     font-family: Gilroy-Light;
