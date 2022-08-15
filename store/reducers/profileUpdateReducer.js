@@ -19,6 +19,9 @@ const profileUpdateSlice = createSlice({
       addWeight: (state, action) =>{
         state.weight = action.payload;
       },
+      addBloodPressure: (state, action) =>{
+        state.bloodPressure = action.payload;
+      },
     },
   })
 
