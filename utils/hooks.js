@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 export const useMenuDropdown = (id) =>{
     useEffect(() => {
         window.addEventListener('resize', function(){
@@ -20,4 +20,106 @@ export const useMenuDropdown = (id) =>{
           console.log('clicked')
       }
       return menuHandler;
+}
+
+export const useUnitSwitchHandler = (e) =>{
+  const [unit, setUnit] = useState('imperial');
+
+  const UnitSwitchHandler = (e) =>{
+    let clickedElement = e.target.getAttribute('id')
+    if(clickedElement == 'imperialSwitch'){
+      document.getElementById('baseSwitch').classList.remove('activeSwitch')
+      document.getElementById('imperialSwitch').classList.add('activeSwitch')
+      setUnit('imperial')
+    }else{
+      document.getElementById('baseSwitch').classList.add('activeSwitch')
+      document.getElementById('imperialSwitch').classList.remove('activeSwitch')
+      setUnit('base')
+    }
+  }
+  return [UnitSwitchHandler, unit];
+}
+
+export const useProfileErrorHandler1 = () => {
+  const [error, setError] = useState(false)
+  const [dayError, setDayError] = useState(false)
+  const [monthError, setMonthError] = useState(false)
+  const [yearError, setYearError] = useState(false)
+  const [genderError, setGenderError] = useState(false)
+  const [heightError, setHeightError] = useState(false)
+  const [weightError, setWeightError] = useState(false)
+
+  const profileFormValidator1 = (gender, feet, inches, kg, centimeter, pounds, day, month, year, unit) =>{
+    let error = [];
+    if(!day){
+        error.push('day')
+    }
+    if(!month){
+        error.push('month')
+    }
+    if(!year){
+        error.push('year')
+    }
+    if(!gender){
+        error.push('gender')
+    }
+    if(unit == 'imperial'){
+        if(!feet){
+            error.push('feet')
+        }
+        if(!inches){
+            error.push('inches')
+        }
+        if(!kg){
+            error.push('kg')
+        }
+    }else{
+        if(!centimeter){
+            error.push('centimeter')
+        }
+        if(!pounds){
+            error.push('pounds')
+        }
+    }
+    return error;
+}
+const errorHide = () =>{
+    if(error){
+        setError(false);
+        setDayError(false)
+        setMonthError(false)
+        setGenderError(false)
+        setYearError(false)
+        setHeightError(false)
+        setWeightError(false)
+    }
+    
+}
+const errorDisplay = (error) =>{
+    if(error.length>0){
+        setError('Fill in missing field(s)')
+    }
+    error.map(value=>{
+        switch(value){
+            case 'day':  setDayError(true)
+            break;
+            case 'month':  setMonthError(true)
+            break;
+            case 'year':  setYearError(true)
+            break;
+            case 'feet': setHeightError(true)
+            break;
+            case 'inches': setHeightError(true)
+            break;
+            case 'cm': setHeightError(true)
+            break;
+            case 'kg': setWeightError(true)
+            break;
+            case 'pounds': setWeightError(true)
+            break;
+        }
+    })
+}
+return [error, dayError, monthError, yearError, genderError, heightError, weightError,
+  profileFormValidator1, errorHide, errorDisplay]
 }

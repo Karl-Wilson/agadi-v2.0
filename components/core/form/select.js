@@ -6,7 +6,7 @@ const Wrapper = styled.select`
     padding: 10px;
     border-radius: 10px;
     background-color: transparent;
-    border: 1px solid #cccccc;
+    border: ${props=> props.error? '1px solid red':'1px solid #cccccc'};
     margin-right: ${props=>props.mr||''};
     margin-left: ${props=>props.ml||''};
     margin-top: ${props=>props.mt||''};

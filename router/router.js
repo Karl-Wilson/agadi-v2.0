@@ -47,7 +47,7 @@ export const useProfileUpdateRouter = () =>{
     
     
     switch(path.pages[2]){
-        case '1': return <UpdaterOne/>;
+        case '1': return <UpdaterOne userUrl={userUrl}/>;
         break;
         case '2': return <UpdaterTwo/>;
         break;

@@ -3,7 +3,15 @@ const Wrapper = styled.input`
     width: ${props=>props.width||'100%'};
     height: ${props=>props.height||'50px'};
     padding: 15px;
-    border: ${props=>props.borderless? '0px' : '1px solid #cccccc'};
+    border: ${props=>{
+        if(props.borderless){
+            return '0px'
+        }
+        if(props.error){
+            return '0px solid red'
+        }
+        return '0px solid #cccccc'}
+    };
     border-radius: 10px;
     font-family: Gilroy-Light;
     margin-right: ${props=>props.Smr||''};

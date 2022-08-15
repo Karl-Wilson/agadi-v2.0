@@ -8,7 +8,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center; 
-    border: 1px solid #cccccc;
+    border: ${props=>props.error? '1px solid red': '1px solid #cccccc'};
     height: 50px;
 `
 const InputContainer = styled.div`
@@ -35,39 +35,35 @@ const FeetForm = props =>{
 const CentimeterForm = props =>{
     return(
         <div>
-            <Input borderless type="text" name="centimeter" placeholder="Centimeter"/>
+            <Input borderless type="text" name="centimeter" placeholder="Centimeter" height="48px" error={props.error}/>
         </div>
     )
 }
 export const HeightInputContainer = props =>{
-    const [selected, setSelect] = useState('imperial');
-
     return(
-        <Wrapper width="300px">
+        <Wrapper width="300px"  error={props.error} onClick={props.onClick}>
             <InputContainer>
-            {(selected == "imperial") && <FeetForm/>}
-            {(selected == "base") && <CentimeterForm/>}
+            {(props.unit == "imperial") && <FeetForm/>}
+            {(props.unit == "base") && <CentimeterForm />}
             </InputContainer>
             <InputSelect>
-                {(selected == "imperial") && <p>Feet</p>}
-                {(selected == "base") && <p>Centimeter</p>}
+                {(props.unit == "imperial") && <p>Feet</p>}
+                {(props.unit == "base") && <p>Centimeter</p>}
             </InputSelect>
         </Wrapper>
     )
 }
 
 export const WeightInputContainer = props =>{
-    const [selected, setSelect] = useState('imperial');
-
     return(
-        <Wrapper width="200px">
+        <Wrapper width="200px"  error={props.error} onClick={props.onClick}>
             <InputContainer>
-            {(selected == "imperial") && <Input borderless type="text" name="kg" placeholder="Kilogram" height="48px"/>}
-            {(selected == "base") && <Input borderless type="text" name="pounds" placeholder="Pounds" height="48px"/>}
+            {(props.unit == "imperial") && <Input borderless type="text" name="kg" placeholder="Kilogram" height="48px" />}
+            {(props.unit == "base") && <Input borderless type="text" name="pounds" placeholder="Pounds" height="48px"/>}
             </InputContainer>
             <InputSelect>
-                {(selected == "imperial") && <p>Kg</p>}
-                {(selected == "base") && <p>Lbs</p>}
+                {(props.unit == "imperial") && <p>Kg</p>}
+                {(props.unit == "base") && <p>Lbs</p>}
             </InputSelect>
         </Wrapper>
     )
