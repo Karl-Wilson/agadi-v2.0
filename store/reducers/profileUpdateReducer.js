@@ -25,6 +25,9 @@ const profileUpdateSlice = createSlice({
       addSugarLevel: (state, action) =>{
         state.sugarLevel = action.payload;
       },
+      addMedication: (state, action) =>{
+        state.medication = action.payload;
+      },
     },
   })
 

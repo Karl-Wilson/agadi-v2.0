@@ -37,3 +37,21 @@ export const yearGenerator = () =>{
     return result;
 }
 
+export const isInputString = (str) => {
+    if(isNaN(str)){
+        return true
+    }
+    return false;
+}
+export const isInputInteger = (int) => {
+    if(isNaN(int)){
+        return false
+    }
+    return true;
+}
+export const isInputEmpty = (input) =>{
+    if(input){
+        return false;
+    }
+    return true;
+}
