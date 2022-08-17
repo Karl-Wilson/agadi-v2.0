@@ -6,6 +6,7 @@ import {FormTitleContainer, FormButtonContainer, BPInputContainer, FormInputCont
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { profileUpdateAction } from '../../../store/reducers/profileUpdateReducer'
+import { useBackBtn } from '../../../utils/hooks'
 const Form= styled.form`
     display: flex;
     flex-direction: column;
@@ -25,9 +26,7 @@ const UpdaterTwo = props =>{
     const bloodPressure = useSelector(state=>state.profileUpdate.bloodPressure)
     const {addBloodPressure} = profileUpdateAction;
     const [error, setError] = useState(false);
-    const backBtnHandler = () =>{
-        router.push(`/${props.userUrl}/profile-update/1`)  
-    }
+    const backBtnHandler = useBackBtn(props.userUrl, 1)
 
     const readingValidation = (BP) =>{
         if(BP){
