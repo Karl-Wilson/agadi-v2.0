@@ -3,7 +3,7 @@ import {PageWrapper, Logo, Button} from '../../../components/core/core'
 import {FormWrapper, Label, Select, Input, FormErrorDisplay} from "../../../components/core/form/form"
 import {FormTitleContainer, FormInputContainer, FormGroup, InputGroup, HeightInputContainer, WeightInputContainer, FormButtonContainer} from "../../../components/containers/containers"
 import { profileUpdateAction } from "../../../store/reducers/profileUpdateReducer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { dayGenerator, yearGenerator, profileInputHandler } from "../../../utils/helper";
 import { useUnitSwitchHandler, useProfileFormHandler1 } from "../../../utils/hooks";
@@ -35,39 +35,60 @@ const UnitSwitch = styled.div`
 `
 
 const UpdaterOne = props =>{
-    const [UnitSwitchHandler, unit] = useUnitSwitchHandler()
-    const [error, dayError, monthError, yearError, genderError, heightError, weightError,
-        profileFormValidator1, errorHide, errorDisplay, profileInputHandler] = useProfileFormHandler1()
-
-    const {addDoB, addGender, addUnitMethod, addHeight,addWeight} = profileUpdateAction
     const day = dayGenerator()
     const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     const year = yearGenerator()
     const dispatch = useDispatch();
     const router = useRouter()
+    const dayValue = useSelector(state=>state.profileUpdate.day)
+    const monthValue = useSelector(state=>state.profileUpdate.month)
+    const yearValue = useSelector(state=>state.profileUpdate.year)
+    const genderValue = useSelector(state=>state.profileUpdate.gender)
+    const feetValue = useSelector(state=>state.profileUpdate.feet)
+    const inchesValue = useSelector(state=>state.profileUpdate.inches)
+    const centimeterValue = useSelector(state=>state.profileUpdate.centimeter)
+    const kgValue = useSelector(state=>state.profileUpdate.kg)
+    const poundsValue = useSelector(state=>state.profileUpdate.pounds)
+    const [UnitSwitchHandler, unit] = useUnitSwitchHandler()
 
+    const [error, dayError, monthError, yearError, genderError, heightError, weightError,
+        profileFormValidator1, errorHide, errorDisplay, profileInputHandler] = useProfileFormHandler1()
+
+    const {addDay, addMonth, addYear, addGender, addUnitMethod, addFeet, addInches, addCentimeter, addKg, addPounds} = profileUpdateAction
+    
+    const changeHandler = (e) =>{
+        let name = e.target.getAttribute('name')
+        let value = e.target.value
+        switch(name){
+            case 'day': dispatch(addDay(value))
+            break;
+            case 'month': dispatch(addMonth(value))
+            break;
+            case 'year': dispatch(addYear(value))
+            break;
+            case 'gender': dispatch(addGender(value))
+            break;
+            case 'feet': dispatch(addFeet(value))
+            break;
+            case 'inches': dispatch(addInches(value))
+            break;
+            case 'centimeter': dispatch(addCentimeter(value))
+            break;
+            case 'kg': dispatch(addKg(value))
+            break;
+            case 'pounds': dispatch(addPounds(value))
+            break;
+        }
+    }
 
 
     
     const clickHandler = (e) =>{
         e.preventDefault()
-        const [gender, feet, inches, kg, centimeter, pounds, day, month, year] = profileInputHandler(unit);
-        const error = profileFormValidator1(gender, feet, inches, kg, centimeter, pounds, day, month, year, unit)
+        //const [gender, feet, inches, kg, centimeter, pounds, day, month, year] = profileInputHandler(unit);
+        const error = profileFormValidator1(genderValue, feetValue, inchesValue, kgValue, centimeterValue, poundsValue, dayValue, monthValue, yearValue, unit)
         if(error.length<=0){
-            let DoB = `${day}/${month}/${year}`;
-            console.log(DoB)
-            dispatch(addDoB(DoB))
-            dispatch(addGender(gender))
-            if(unit == 'imperial'){
-                dispatch(addUnitMethod('imperial'))
-                dispatch(addHeight({feet: feet, inches: inches}))
-                dispatch(addWeight({kg: kg}))
-            }else{
-                dispatch(addUnitMethod('base'))
-                dispatch(addHeight({centimeter: centimeter}))
-                dispatch(addWeight({pounds: pounds}))
-            }
-            router.push(`/${props.userUrl}/profile-update/2`)  
+            //router.push(`/${props.userUrl}/profile-update/2`)  
         }else{
             errorDisplay(error)
         }
@@ -84,19 +105,19 @@ const UpdaterOne = props =>{
                         <FormGroup mb="24px">
                             <Label mb="10px">Date of Birth</Label>
                             <InputGroup FlexDirection="row">
-                                <Select name="day" error={dayError} onClick={errorHide}>
+                                <Select name="day" error={dayError} onClick={errorHide} onChange={changeHandler}>
                                     <option hidden>Day</option>
                                     {day.map(value=>{
                                         return <option>{value}</option>
                                     })}
                                 </Select>
-                                <Select name="month" error={monthError} onClick={errorHide}>
+                                <Select name="month" error={monthError} onClick={errorHide} onChange={changeHandler}>
                                     <option hidden>Month</option>
                                     {month.map(value=>{
                                         return <option>{value}</option>
                                     })}
                                 </Select>
-                                <Select name="year" error={yearError} onClick={errorHide}>
+                                <Select name="year" error={yearError} onClick={errorHide} onChange={changeHandler}>
                                     <option hidden>Year</option>
                                     {year.map(value=>{
                                         return <option>{value}</option>
@@ -107,11 +128,11 @@ const UpdaterOne = props =>{
 
                         <FormGroup mb="24px">
                             <Label mb="10px">Gender</Label>
-                            <InputGroup FlexDirection="row">
-                                <Input type="radio" error={genderError} onClick={errorHide} value="male" name="gender" Smr="10px" width="15px" height="20px"/>
-                                <Label mr="20px">Male</Label>
-                                <Input type="radio" error={genderError} onClick={errorHide} value="female" name="gender" Smr="10px" width="15px" height="20px"/>
-                                <Label>Female</Label>
+                            <InputGroup FlexDirection="row" onChange={changeHandler}>
+                                <Input type="radio" onClick={errorHide} error={genderError} value="male" name="gender" Smr="10px" width="15px" height="20px"/>
+                                <Label mr="20px" >Male</Label>
+                                <Input type="radio" onClick={errorHide} error={genderError} value="female" name="gender" Smr="10px" width="15px" height="20px"/>
+                                <Label >Female</Label>
                             </InputGroup>
                         </FormGroup>
                         <FormGroup mb="24px" mt="24px">
@@ -122,12 +143,12 @@ const UpdaterOne = props =>{
                         </FormGroup>
                         <FormGroup mb="24px">
                             <Label mb="10px">Height</Label>
-                            <HeightInputContainer unit={unit} error={heightError} onClick={errorHide}/>
+                            <HeightInputContainer unit={unit} feet={feetValue} inches={inchesValue} centimeter={centimeterValue} error={heightError} onClick={errorHide} change={changeHandler}/>
                         </FormGroup>
 
                         <FormGroup mb="24px">
                             <Label mb="10px">Weight</Label>
-                            <WeightInputContainer unit={unit} error={weightError} onClick={errorHide}/>
+                            <WeightInputContainer unit={unit} error={weightError} onClick={errorHide} change={changeHandler} kg={kgValue} pounds={poundsValue}/>
                         </FormGroup>
                     </FormInputContainer>
                     <FormButtonContainer>

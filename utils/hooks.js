@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
+import { isInputInteger } from "./helper"
 export const useMenuDropdown = (id) =>{
     useEffect(() => {
         window.addEventListener('resize', function(){
@@ -84,20 +85,20 @@ export const useProfileFormHandler1 = () => {
         error.push('gender')
     }
     if(unit == 'imperial'){
-        if(!feet){
+        if(!feet || !isInputInteger(feet)){
             error.push('feet')
         }
-        if(!inches){
+        if(!inches || !isInputInteger(inches)){
             error.push('inches')
         }
-        if(!kg){
+        if(!kg || !isInputInteger(kg)){
             error.push('kg')
         }
     }else{
-        if(!centimeter){
+        if(!centimeter || !isInputInteger(centimeter)){
             error.push('centimeter')
         }
-        if(!pounds){
+        if(!pounds || !isInputInteger(pounds)){
             error.push('pounds')
         }
     }
@@ -127,11 +128,13 @@ const errorDisplay = (error) =>{
             break;
             case 'year':  setYearError(true)
             break;
+            case 'gender': setGenderError(true)
+            break;
             case 'feet': setHeightError(true)
             break;
             case 'inches': setHeightError(true)
             break;
-            case 'cm': setHeightError(true)
+            case 'centimeter': setHeightError(true)
             break;
             case 'kg': setWeightError(true)
             break;

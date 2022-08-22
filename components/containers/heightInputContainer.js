@@ -27,24 +27,24 @@ const FeetWrapper = styled.div`
 const FeetForm = props =>{
     return(
         <FeetWrapper>
-            <Input borderless type="text" name="feet" placeholder="Feet" height="48px"/>
-            <Input borderless type="text" name="inches" placeholder="Inches" height="48px"/>
+            <Input borderless type="text" name="feet" placeholder="Feet" height="48px" value={props.feet} onChange={props.change}/>
+            <Input borderless type="text" name="inches" placeholder="Inches" height="48px" value={props.inches} onChange={props.change}/>
         </FeetWrapper>
     )
 }
 const CentimeterForm = props =>{
     return(
         <div>
-            <Input borderless type="text" name="centimeter" placeholder="Centimeter" height="48px" error={props.error}/>
+            <Input borderless type="text" name="centimeter" placeholder="Centimeter" height="48px" error={props.error} value={props.centimeter} onChange={props.change}/>
         </div>
     )
 }
 export const HeightInputContainer = props =>{
     return(
-        <Wrapper width="300px"  error={props.error} onClick={props.onClick}>
+        <Wrapper width="300px"  error={props.error} onClick={props.onClick} >
             <InputContainer>
-            {(props.unit == "imperial") && <FeetForm/>}
-            {(props.unit == "base") && <CentimeterForm />}
+            {(props.unit == "imperial") && <FeetForm feet={props.feet} inches={props.inches} change={props.change}/>}
+            {(props.unit == "base") && <CentimeterForm centimeter={props.centimeter} change={props.change}/>}
             </InputContainer>
             <InputSelect>
                 {(props.unit == "imperial") && <p>Feet</p>}
@@ -58,8 +58,8 @@ export const WeightInputContainer = props =>{
     return(
         <Wrapper width="200px"  error={props.error} onClick={props.onClick}>
             <InputContainer>
-            {(props.unit == "imperial") && <Input borderless type="text" name="kg" placeholder="Kilogram" height="48px" />}
-            {(props.unit == "base") && <Input borderless type="text" name="pounds" placeholder="Pounds" height="48px"/>}
+            {(props.unit == "imperial") && <Input borderless type="text" onChange={props.change} name="kg" placeholder="Kilogram" height="48px" value={props.kg}/>}
+            {(props.unit == "base") && <Input borderless type="text" onChange={props.change} name="pounds" placeholder="Pounds" height="48px" value={props.pounds}/>}
             </InputContainer>
             <InputSelect>
                 {(props.unit == "imperial") && <p>Kg</p>}
