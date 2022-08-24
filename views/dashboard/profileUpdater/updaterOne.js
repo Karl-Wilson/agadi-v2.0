@@ -138,7 +138,7 @@ const UpdaterOne = props =>{
                         <FormGroup mb="24px" mt="24px">
                             <UnitSwitch>
                                 <div onClick={UnitSwitchHandler} id="imperialSwitch" class="activeSwitch">Imperial</div>
-                                <div onClick={UnitSwitchHandler} id="baseSwitch">Base</div>
+                                <div onClick={UnitSwitchHandler} id="metricSwitch">Metric</div>
                             </UnitSwitch>
                         </FormGroup>
                         <FormGroup mb="24px">
