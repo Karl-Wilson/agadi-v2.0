@@ -88,7 +88,7 @@ const UpdaterOne = props =>{
         //const [gender, feet, inches, kg, centimeter, pounds, day, month, year] = profileInputHandler(unit);
         const error = profileFormValidator1(genderValue, feetValue, inchesValue, kgValue, centimeterValue, poundsValue, dayValue, monthValue, yearValue, unit)
         if(error.length<=0){
-            //router.push(`/${props.userUrl}/profile-update/2`)  
+            router.push(`/${props.userUrl}/profile-update/2`)  
         }else{
             errorDisplay(error)
         }
