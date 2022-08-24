@@ -44,11 +44,11 @@ export const HeightInputContainer = props =>{
         <Wrapper width="300px"  error={props.error} onClick={props.onClick} >
             <InputContainer>
             {(props.unit == "imperial") && <FeetForm feet={props.feet} inches={props.inches} change={props.change}/>}
-            {(props.unit == "base") && <CentimeterForm centimeter={props.centimeter} change={props.change}/>}
+            {(props.unit == "metric") && <CentimeterForm centimeter={props.centimeter} change={props.change}/>}
             </InputContainer>
             <InputSelect>
                 {(props.unit == "imperial") && <p>Feet</p>}
-                {(props.unit == "base") && <p>Centimeter</p>}
+                {(props.unit == "metric") && <p>Centimeter</p>}
             </InputSelect>
         </Wrapper>
     )
@@ -58,12 +58,12 @@ export const WeightInputContainer = props =>{
     return(
         <Wrapper width="200px"  error={props.error} onClick={props.onClick}>
             <InputContainer>
-            {(props.unit == "imperial") && <Input borderless type="text" onChange={props.change} name="kg" placeholder="Kilogram" height="48px" value={props.kg}/>}
-            {(props.unit == "base") && <Input borderless type="text" onChange={props.change} name="pounds" placeholder="Pounds" height="48px" value={props.pounds}/>}
+            {(props.unit == "metric") && <Input borderless type="text" onChange={props.change} name="kg" placeholder="Kilogram" height="48px" value={props.kg}/>}
+            {(props.unit == "imperial") && <Input borderless type="text" onChange={props.change} name="pounds" placeholder="Pounds" height="48px" value={props.pounds}/>}
             </InputContainer>
             <InputSelect>
-                {(props.unit == "imperial") && <p>Kg</p>}
-                {(props.unit == "base") && <p>Lbs</p>}
+                {(props.unit == "metric") && <p>Kg</p>}
+                {(props.unit == "imperial") && <p>Lbs</p>}
             </InputSelect>
         </Wrapper>
     )
