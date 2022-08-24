@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { isInputInteger } from "./helper"
+import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import { profileUpdateAction } from "../store/reducers/profileUpdateReducer"
 export const useMenuDropdown = (id) =>{
     useEffect(() => {
         window.addEventListener('resize', function(){
@@ -25,21 +28,26 @@ export const useMenuDropdown = (id) =>{
 }
 
 export const useUnitSwitchHandler = (e) =>{
-  const [unit, setUnit] = useState('imperial');
+    const {addUnitMethod} = profileUpdateAction
+    const dispatch = useDispatch()
+
+//   const [unit, setUnit] = useState('imperial');
 
   const UnitSwitchHandler = (e) =>{
     let clickedElement = e.target.getAttribute('id')
     if(clickedElement == 'imperialSwitch'){
       document.getElementById('baseSwitch').classList.remove('activeSwitch')
       document.getElementById('imperialSwitch').classList.add('activeSwitch')
-      setUnit('imperial')
+      dispatch(addUnitMethod('imperial'))
+    //   setUnit('imperial')
     }else{
       document.getElementById('baseSwitch').classList.add('activeSwitch')
       document.getElementById('imperialSwitch').classList.remove('activeSwitch')
-      setUnit('base')
+      dispatch(addUnitMethod('base'))
+    //   setUnit('base')
     }
   }
-  return [UnitSwitchHandler, unit];
+  return UnitSwitchHandler;
 }
 
 export const useProfileFormHandler1 = () => {
@@ -153,4 +161,20 @@ export const useBackBtn = (UserUrl, pageNumber) =>{
         router.push(`/${UserUrl}/profile-update/${pageNumber}`)  
     }
     return backBtnHandler;
+}
+
+export const useProfileUpdateFields = () =>{
+    const day = useSelector(state=>state.profileUpdate.day);
+    const month = useSelector(state=>state.profileUpdate.month);
+    const year = useSelector(state=>state.profileUpdate.year);
+    const gender = useSelector(state=>state.profileUpdate.gender);
+    const unitMethod = useSelector(state=>state.profileUpdate.unitMethod);
+    const feet = useSelector(state=>state.profileUpdate.feet);
+    const inches = useSelector(state=>state.profileUpdate.inches);
+    const centimeter = useSelector(state=>state.profileUpdate.centimeter);
+    const kg = useSelector(state=>state.profileUpdate.kg);
+    const pounds = useSelector(state=>state.profileUpdate.pounds);
+    const bloodPressure = useSelector(state=>state.profileUpdate.bloodPressure);
+    const sugarLevel = useSelector(state=>state.profileUpdate.sugarLevel);
+    const medication = useSelector(state=>state.profileUpdate.medication);
 }

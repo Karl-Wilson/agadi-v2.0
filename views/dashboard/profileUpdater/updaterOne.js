@@ -49,12 +49,13 @@ const UpdaterOne = props =>{
     const centimeterValue = useSelector(state=>state.profileUpdate.centimeter)
     const kgValue = useSelector(state=>state.profileUpdate.kg)
     const poundsValue = useSelector(state=>state.profileUpdate.pounds)
-    const [UnitSwitchHandler, unit] = useUnitSwitchHandler()
+    const unit = useSelector(state=>state.profileUpdate.unitMethod)
+    const UnitSwitchHandler = useUnitSwitchHandler()
 
     const [error, dayError, monthError, yearError, genderError, heightError, weightError,
         profileFormValidator1, errorHide, errorDisplay, profileInputHandler] = useProfileFormHandler1()
 
-    const {addDay, addMonth, addYear, addGender, addUnitMethod, addFeet, addInches, addCentimeter, addKg, addPounds} = profileUpdateAction
+    const {addDay, addMonth, addYear, addGender, addFeet, addInches, addCentimeter, addKg, addPounds} = profileUpdateAction
     
     const changeHandler = (e) =>{
         let name = e.target.getAttribute('name')
@@ -82,7 +83,6 @@ const UpdaterOne = props =>{
     }
 
 
-    
     const clickHandler = (e) =>{
         e.preventDefault()
         //const [gender, feet, inches, kg, centimeter, pounds, day, month, year] = profileInputHandler(unit);
