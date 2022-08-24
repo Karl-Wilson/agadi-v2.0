@@ -36,14 +36,14 @@ export const useUnitSwitchHandler = (e) =>{
   const UnitSwitchHandler = (e) =>{
     let clickedElement = e.target.getAttribute('id')
     if(clickedElement == 'imperialSwitch'){
-      document.getElementById('baseSwitch').classList.remove('activeSwitch')
+      document.getElementById('metricSwitch').classList.remove('activeSwitch')
       document.getElementById('imperialSwitch').classList.add('activeSwitch')
       dispatch(addUnitMethod('imperial'))
     //   setUnit('imperial')
     }else{
-      document.getElementById('baseSwitch').classList.add('activeSwitch')
+      document.getElementById('metricSwitch').classList.add('activeSwitch')
       document.getElementById('imperialSwitch').classList.remove('activeSwitch')
-      dispatch(addUnitMethod('base'))
+      dispatch(addUnitMethod('metric'))
     //   setUnit('base')
     }
   }
@@ -70,10 +70,10 @@ export const useProfileFormHandler1 = () => {
     if(unit == 'imperial'){
         feet = document.querySelector('input[name="feet"]').value
         inches = document.querySelector('input[name="inches"]').value
-        kg = document.querySelector('input[name="kg"]').value
+        pounds = document.querySelector('input[name="pounds"]').value
     }else{
         centimeter = document.querySelector('input[name="centimeter"]').value
-        pounds = document.querySelector('input[name="pounds"]').value
+        kg = document.querySelector('input[name="kg"]').value
     }
     return [gender, feet, inches, kg, centimeter, pounds, day, month, year]
 }
@@ -99,15 +99,16 @@ export const useProfileFormHandler1 = () => {
         if(!inches || !isInputInteger(inches)){
             error.push('inches')
         }
-        if(!kg || !isInputInteger(kg)){
-            error.push('kg')
+        if(!pounds || !isInputInteger(pounds)){
+            error.push('pounds')
         }
+        
     }else{
         if(!centimeter || !isInputInteger(centimeter)){
             error.push('centimeter')
         }
-        if(!pounds || !isInputInteger(pounds)){
-            error.push('pounds')
+        if(!kg || !isInputInteger(kg)){
+            error.push('kg')
         }
     }
     return error;
@@ -177,4 +178,18 @@ export const useProfileUpdateFields = () =>{
     const bloodPressure = useSelector(state=>state.profileUpdate.bloodPressure);
     const sugarLevel = useSelector(state=>state.profileUpdate.sugarLevel);
     const medication = useSelector(state=>state.profileUpdate.medication);
+    const DoB = `${day}/${month}/${year}`
+    const height = (unitMethod == 'imperial')? {feet: feet, inches: inches} : {centimeter: centimeter};
+    const weight = (unitMethod == 'imperial')? {kg: kg} : {pounds: pounds};
+
+    const data = {
+        DoB: DoB,
+        gender: gender,
+        height: height,
+        weight: weight,
+        bloodPressure: bloodPressure,
+        sugarLevel: sugarLevel,
+        medication: medication
+    }
+    return data;
 }
