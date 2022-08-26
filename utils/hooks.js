@@ -177,12 +177,15 @@ export const useProfileUpdateFields = () =>{
     const pounds = useSelector(state=>state.profileUpdate.pounds);
     const bloodPressure = useSelector(state=>state.profileUpdate.bloodPressure);
     const sugarLevel = useSelector(state=>state.profileUpdate.sugarLevel);
-    const medication = useSelector(state=>state.profileUpdate.medication);
+    const session = useSelector(state=>state.ui.user);
+    //const medication = useSelector(state=>state.profileUpdate.medication);
     const DoB = `${day}/${month}/${year}`
     const height = (unitMethod == 'imperial')? {feet: feet, inches: inches} : {centimeter: centimeter};
     const weight = (unitMethod == 'imperial')? {kg: kg} : {pounds: pounds};
 
-    const data = {
+    const data = (medication) => {
+        const data = {
+        userEmail: session.email,
         DoB: DoB,
         gender: gender,
         height: height,
@@ -190,6 +193,8 @@ export const useProfileUpdateFields = () =>{
         bloodPressure: bloodPressure,
         sugarLevel: sugarLevel,
         medication: medication
+    }
+    return data;
     }
     return data;
 }

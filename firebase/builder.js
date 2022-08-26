@@ -1,4 +1,4 @@
-import {collection, query, where, getDocs, addDoc } from 'firebase/firestore'
+import {collection, query, where, getDocs, addDoc, doc, updateDoc, serverTimestamp } from 'firebase/firestore'
 import db from './config';
 export const loginBuilder = async (email, password) =>{
     let user;
@@ -41,13 +41,64 @@ export const profileUpdateChecker = async(email) =>{
     let {profileUpdate} = found
     return profileUpdate;
 }
-export const profileUpdateUpdater = async(email) =>{
+// export const profileUpdateUpdater = async(email) =>{
+//     let found;
+//     const q = query(collection(db, 'user'), where('email', '==', email));
+//     const querySnapshot = await getDocs(q);
+//     querySnapshot.forEach((doc) => {
+//         found = doc.data()
+//     });
+//     let {profileUpdate} = found
+//     return profileUpdate;
+// }
+
+
+export const profileUpdateUpdater = async(email, data) =>{
     let found;
     const q = query(collection(db, 'user'), where('email', '==', email));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-        found = doc.data()
+        found = doc.id
     });
-    let {profileUpdate} = found
-    return profileUpdate;
+    console.log(data)
+    try{
+        const profileRef = doc(db, "user", found);
+        updateDoc(profileRef, {
+            ...data, 
+            profileUpdate: true,
+            updated: serverTimestamp()
+        });
+        return 'Updated';
+    }catch(e){
+        return "Unable to Update"
+    }
+}
+export const addBloodPressure = async (email, bloodPressure) =>{
+    // Add a new document with a generated id.
+    const docRef = await addDoc(collection(db, "BloodPressure"), {
+        email: email,
+        reading: bloodPressure,
+        date: serverTimestamp()
+
+    });
+    return docRef.id;
+}
+export const addSugarLevel = async (email, sugarLevel) =>{
+    // Add a new document with a generated id.
+    const docRef = await addDoc(collection(db, "SugarLevel"), {
+        email: email,
+        reading: sugarLevel,
+        date: serverTimestamp()
+
+    });
+    return docRef.id;
+}
+export const addMedication = async (email, medication) =>{
+    // Add a new document with a generated id.
+    const docRef = await addDoc(collection(db, "Medication"), {
+        email: email,
+        medication: medication,
+        date: serverTimestamp()
+    });
+    return docRef.id;
 }

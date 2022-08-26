@@ -8,6 +8,8 @@ import { isInputInteger, isInputString, isInputEmpty } from '../../../utils/help
 import { profileUpdateAction } from '../../../store/reducers/profileUpdateReducer'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
+import { profileUpdaterThunk } from '../../../utils/thunks'
+import { useProfileUpdateFields } from '../../../utils/hooks'
 //question to ask when optimizing, if this component develops a problem how do i find the problem
 //how do i isolate codes to aid in debugging
 
@@ -31,6 +33,7 @@ const UpdaterFour = props =>{
     const backBtnHandler = useBackBtn(props.userUrl, 3);
     const [field, setField] = useState([<DrugEntry key={key} serial={key} />]);
     const [fieldValues, setFieldValues] = useState([{serial: "0", drugName: '', duration: '', dosage: ''}]);
+    const data = useProfileUpdateFields()
 
     const addHandler = () =>{
         ++key
@@ -117,6 +120,8 @@ const UpdaterFour = props =>{
             console.log(fieldValues)
             dispatch(addMedication(fieldValues))
             //send to database
+            profileUpdaterThunk(data(fieldValues), dispatch)
+            
         }else{
             errorDisplay(result)
         }
