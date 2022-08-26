@@ -44,7 +44,10 @@ export const useProfileUpdateRouter = () =>{
             router.replace(`/${userUrl}`)
         }
             //handles all url routing
-            if((path.pages.length == 2 || path.pages.length == 3 || path.pages.length > 3) && path.pages[0] == userUrl && path.pages[1] == "profile-update"){
+            //note: added isProfileUpdated because without setting it, when router reroutes to dashboard, it glitches
+            //it doesn;t reroute smoothly, because in a function, after setting router, it doesnt reflect immediately
+            //till it runs the function completely thereby retaining old values till after running function
+            if(!isProfileUpdated && (path.pages.length == 2 || path.pages.length == 3 || path.pages.length > 3) && path.pages[0] == userUrl && path.pages[1] == "profile-update"){
                 router.replace(`/${userUrl}/profile-update/1`)
                 first = false
             }
