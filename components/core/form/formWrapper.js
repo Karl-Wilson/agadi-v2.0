@@ -12,6 +12,7 @@ const Wrapper = styled.div`
     flex-direction: ${props=>props.SflexDirection||'column'};
     justify-content: ${props=>props.SjustifyContent||''};
     align-items: ${props=>props.SalignItems||''};
+   
     @media screen and (min-width: 764px){
         width: ${props=>props.Lwidth||''};
         height: ${props=>props.Lheight||''};
@@ -20,7 +21,8 @@ const Wrapper = styled.div`
         align-items: ${props=>props.alignItems||''};
         padding: 50px;
         border-radius: 10px;
-        border: 1px solid #cccccc;
+        border: 1px solid #cccccc; 
+        position: relative;
     }
 `
 
