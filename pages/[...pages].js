@@ -50,6 +50,7 @@ export async function getServerSideProps(context) {
         profileUpdate = await profileUpdateChecker(session.user.email)
     }else{
         user = ''
+        profileUpdate = ''
     }
 
     if(url == '/login' || url == "/register"){
