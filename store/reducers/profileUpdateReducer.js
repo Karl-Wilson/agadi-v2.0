@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const profileUpdateSlice = createSlice({
     name: 'ProfileUpdate',
-    initialState: {},
+    initialState: {unitMethod: 'imperial'},
     reducers: {
       addDay: (state, action) => {
         state.day = action.payload;
