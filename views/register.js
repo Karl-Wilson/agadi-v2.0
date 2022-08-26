@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { useRef } from "react";
+import { useState } from "react";
 import {FormWrapper, Input} from "../components/core/form/form"
 import {Button, Logo, PageWrapper} from '../components/core/core'
 import {FormButtonContainer, FormInputContainer, FormTitleContainer, InputGroup} from '../components/containers/containers'
 import { registerThunk } from "../utils/thunks";
+import {FormLoading} from '../components/core/loading/loading'
 const Wrapper = styled.div`
     width: 100%;
 `
@@ -17,9 +18,10 @@ const Img = styled.img`
     }
 `
 const Register = props =>{
-    
+    const [isLoading, setLoading] = useState(false)
     const submitHandler = (e) =>{
         e.preventDefault();
+        setLoading(true);
         let firstname = document.querySelector('input[name="firstname"]').value
         let lastname = document.querySelector('input[name="lastname"]').value
         let email = document.querySelector('input[name="email"]').value
@@ -36,6 +38,7 @@ const Register = props =>{
     return(
         <PageWrapper alignItems="center">
                 <FormWrapper Lwidth="800px" dFlex="flex" justifyContent="space-between" alignItems="center">
+                    {isLoading && <FormLoading/>}
                     <InnerWrapper>
                         <Logo/>
                         <FormTitleContainer title="Create your Account" subtitle="to continue to dashboard" mt="35px"/>
