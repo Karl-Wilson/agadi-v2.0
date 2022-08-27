@@ -2,8 +2,8 @@ import { profileUpdateUpdater, addVitalChecks } from "../../firebase/builder";
 
 const handler = async (req, res) =>{
     if(req.method == 'POST'){
-        const {userEmail, DoB, gender, height, weight, bloodPressure, sugarLevel, medication } = req.body
-        const updateData = {DoB: DoB, gender: gender, height: height, weight: weight}
+        const {userEmail, DoB, gender, height, weight, bloodPressure, sugarLevel, medication, unitMethod } = req.body
+        const updateData = {DoB: DoB, gender: gender, height: height, weight: weight, unitMethod: unitMethod}
         //validate here
         try{
             let isProfileUpdated = await profileUpdateUpdater(userEmail, updateData)

@@ -192,6 +192,7 @@ export const useProfileUpdateFields = () =>{
         weight: weight,
         bloodPressure: bloodPressure,
         sugarLevel: sugarLevel,
+        unitMethod: unitMethod,
         medication: medication
     }
     return data;
