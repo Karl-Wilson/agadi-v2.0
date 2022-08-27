@@ -50,8 +50,8 @@ export const isInputInteger = (int) => {
     return true;
 }
 export const isInputEmpty = (input) =>{
-    if(input){
-        return false;
+    if(input.length < 1){
+        return true;
     }
-    return true;
+    return false;
 }
