@@ -7,6 +7,7 @@ import { useBackBtn } from '../../../utils/hooks'
 import {FormWrapper, Label, FormErrorDisplay} from '../../../components/core/form/form'
 import {FormTitleContainer, FormButtonContainer, BPInputContainer, FormInputContainer, FormGroup} from '../../../components/containers/containers'
 import { profileUpdateAction } from '../../../store/reducers/profileUpdateReducer'
+import {FormLoading} from '../../../components/core/loading/loading'
 const Form= styled.form`
     display: flex;
     flex-direction: column;
@@ -19,6 +20,7 @@ const UpdaterThree = props =>{
     const sugarLevel = useSelector(state=>state.profileUpdate.sugarLevel)
     const {addSugarLevel} = profileUpdateAction;
     const [error, setError] = useState(false);
+    const [isLoading, setLoading] = useState(false);
     const backBtnHandler = useBackBtn(props.userUrl, 2)
     
     const readingValidation = (sugarLevel) =>{
@@ -46,15 +48,18 @@ const UpdaterThree = props =>{
         console.log(result)
     }
     const clickHandler = () =>{
+        setLoading(true)
         let isValid = readingValidation(sugarLevel)
         if(isValid){
             dispatch(addSugarLevel(sugarLevel))
             router.push(`/${props.userUrl}/profile-update/4`)  
-        }  
+        } 
+        setLoading(false) 
     }
     return(
         <PageWrapper  pt="24px" pb="24px">
             <FormWrapper Lwidth="500px">
+            {isLoading && <FormLoading/>}
                 <Form>
                     <div>
                         <Logo/>

@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { dayGenerator, yearGenerator, profileInputHandler } from "../../../utils/helper";
 import { useUnitSwitchHandler, useProfileFormHandler1 } from "../../../utils/hooks";
+import {FormLoading} from '../../../components/core/loading/loading'
+import { useState } from "react";
 const Form= styled.form`
 
 `
@@ -35,6 +37,7 @@ const UnitSwitch = styled.div`
 `
 
 const UpdaterOne = props =>{
+    const [isLoading, setLoading] = useState(false);
     const day = dayGenerator()
     const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     const year = yearGenerator()
@@ -85,18 +88,20 @@ const UpdaterOne = props =>{
 
     const clickHandler = (e) =>{
         e.preventDefault()
+        setLoading(true)
         //const [gender, feet, inches, kg, centimeter, pounds, day, month, year] = profileInputHandler(unit);
         const error = profileFormValidator1(genderValue, feetValue, inchesValue, kgValue, centimeterValue, poundsValue, dayValue, monthValue, yearValue, unit)
         if(error.length<=0){
             router.push(`/${props.userUrl}/profile-update/2`)  
         }else{
-            errorDisplay(error)
+            errorDisplay(error)  
         }
-     
+        setLoading(false)
     }
     return(
         <PageWrapper pt="24px" pb="24px" height="auto">
             <FormWrapper Lwidth="500px">
+            {isLoading && <FormLoading/>}
                 <Form>
                     <Logo/>
                     <FormTitleContainer title="Tell us more about yourself" subtitle="to continue to dashboard"/>

@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { profileUpdateAction } from '../../../store/reducers/profileUpdateReducer'
 import { useBackBtn } from '../../../utils/hooks'
+import {FormLoading} from '../../../components/core/loading/loading'
 const Form= styled.form`
     display: flex;
     flex-direction: column;
@@ -21,6 +22,7 @@ const Hint = styled.p`
 //reminder add onchange handler incase one decides to go back 
 
 const UpdaterTwo = props =>{
+    const [isLoading, setLoading] = useState(false);
     const router  = useRouter()
     const dispatch = useDispatch();
     const bloodPressure = useSelector(state=>state.profileUpdate.bloodPressure)
@@ -54,16 +56,19 @@ const UpdaterTwo = props =>{
         console.log(result)
     }
     const clickHandler = () =>{
+        setLoading(true)
         //const bloodPressure = document.querySelector('input[name="bp"]').value
         let isValid = readingValidation(bloodPressure)
         if(isValid){
             dispatch(addBloodPressure(bloodPressure))
             router.push(`/${props.userUrl}/profile-update/3`)  
         }  
+        setLoading(false)
     }
     return(
         <PageWrapper pt="24px" pb="24px">
             <FormWrapper Lwidth="500px">
+            {isLoading && <FormLoading/>}
                 <Form>
                     <div>
                         <Logo/>

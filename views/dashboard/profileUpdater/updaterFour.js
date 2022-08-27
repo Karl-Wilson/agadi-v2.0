@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
 import { profileUpdaterThunk } from '../../../utils/thunks'
 import { useProfileUpdateFields } from '../../../utils/hooks'
+import {FormLoading} from '../../../components/core/loading/loading'
 //question to ask when optimizing, if this component develops a problem how do i find the problem
 //how do i isolate codes to aid in debugging
 
@@ -31,6 +32,7 @@ const UpdaterFour = props =>{
     const router = useRouter();
     const dispatch = useDispatch();
     const backBtnHandler = useBackBtn(props.userUrl, 3);
+    const [isLoading, setLoading] = useState(false);
     const [field, setField] = useState([<DrugEntry key={key} serial={key} />]);
     const [fieldValues, setFieldValues] = useState([{serial: "0", drugName: '', duration: '', dosage: ''}]);
     const data = useProfileUpdateFields()
@@ -115,6 +117,7 @@ const UpdaterFour = props =>{
         errorHide(result)
     }
     const clickHandler = () =>{
+        setLoading(true)
         let result = formValidator(fieldValues)
         if(result.length<=0){
             console.log(fieldValues)
@@ -124,12 +127,14 @@ const UpdaterFour = props =>{
             
         }else{
             errorDisplay(result)
+            setLoading(false)
         }
     }
 
     return(
         <PageWrapper height="auto" pt="24px" pb="24px">
             <FormWrapper Lwidth="500px">
+            {isLoading && <FormLoading/>}
                 <Form>
                     <div>
                     <Logo/>
