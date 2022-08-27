@@ -7,6 +7,7 @@ import UpdaterFour from "../views/dashboard/profileUpdater/updaterFour";
 import { useSelector } from "react-redux";
 import { userUrlBuilder } from "../utils/helper";
 import { useEffect } from "react";
+import {PageLoading} from '../components/core/loading/loading'
 //any component with router must return <Loading/> component as default
 //to get reroute without displaying the current url components, decalre a variable outside the component to help track first time load
 
@@ -58,7 +59,7 @@ export const useProfileUpdateRouter = () =>{
 //when using useRouter();
 
     if(first){  
-        return <div>Loading</div>
+        return <PageLoading/>
     }else{
         switch(path.pages[2]){
         case '1': return <UpdaterOne userUrl={userUrl}/>;

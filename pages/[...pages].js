@@ -6,6 +6,7 @@ import { uiAction } from "../store/reducers/uiReducer";
 import { useEffect } from "react";
 import { userUrlBuilder } from "../utils/helper";
 import { profileUpdateChecker } from "../firebase/builder";
+import {PageLoading} from '../components/core/loading/loading'
 
 const PageRouter = props =>{
     const router = useRouter();
@@ -35,7 +36,7 @@ const PageRouter = props =>{
             default: return <div>404 page</div>;
             } 
     }else{
-        return <div>loading</div>
+        return <PageLoading/>
     } 
 }
 export default PageRouter;
