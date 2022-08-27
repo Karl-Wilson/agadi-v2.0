@@ -120,10 +120,11 @@ const UpdaterFour = props =>{
         setLoading(true)
         let result = formValidator(fieldValues)
         if(result.length<=0){
-            console.log(fieldValues)
+            //console.log(data(fieldValues))
             dispatch(addMedication(fieldValues))
             //send to database
-            profileUpdaterThunk(data(fieldValues), dispatch)
+
+           profileUpdaterThunk(data(fieldValues), dispatch)
             
         }else{
             errorDisplay(result)
