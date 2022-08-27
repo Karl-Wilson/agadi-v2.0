@@ -8,7 +8,7 @@ const Wrapper = styled.input`
             return '0px'
         }
         if(props.error){
-            return '0px solid red'
+            return '1px solid red'
         }
         return '1px solid #cccccc'}
     };
