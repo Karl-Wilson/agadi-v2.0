@@ -181,7 +181,7 @@ export const useProfileUpdateFields = () =>{
     //const medication = useSelector(state=>state.profileUpdate.medication);
     const DoB = `${day}/${month}/${year}`
     const height = (unitMethod == 'imperial')? {feet: feet, inches: inches} : {centimeter: centimeter};
-    const weight = (unitMethod == 'imperial')? {kg: kg} : {pounds: pounds};
+    const weight = (unitMethod == 'imperial')? {pounds: pounds} : {kg: kg};
 
     const data = (medication) => {
         const data = {
