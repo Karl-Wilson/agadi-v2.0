@@ -9,18 +9,12 @@ export const loginThunk = (data) =>{
         });
 }
 export const registerThunk = async (data) =>{
-    fetch('/api/register', { 
+    const response = await fetch('/api/register', { 
         method: 'POST', 
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)}).then(response => {return response.json(); }).then(data => {
-            console.log(data)
-            if(data.error){
-
-            }
-            if(data.data){
-                let result = signIn('login', {redirect: true, email: data.data.email, password: data.data.password})
-            }      
-        });
+        body: JSON.stringify(data)})
+        
+    return response.json()  
 }
 export const profileUpdaterThunk = (data, dispatch) =>{
     const {addProfileUpdate} = uiAction
