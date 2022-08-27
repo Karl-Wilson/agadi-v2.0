@@ -60,7 +60,6 @@ export const profileUpdateUpdater = async(email, data) =>{
     querySnapshot.forEach((doc) => {
         found = doc.id
     });
-    console.log(data)
     try{
         const profileRef = doc(db, "user", found);
         updateDoc(profileRef, {
@@ -73,32 +72,13 @@ export const profileUpdateUpdater = async(email, data) =>{
         return "Unable to Update"
     }
 }
-export const addBloodPressure = async (email, bloodPressure) =>{
+export const addVitalChecks = async (email, reading, documentName) =>{
     // Add a new document with a generated id.
-    const docRef = await addDoc(collection(db, "BloodPressure"), {
+    const docRef = await addDoc(collection(db, documentName), {
         email: email,
-        reading: bloodPressure,
+        reading: reading,
         date: serverTimestamp()
 
-    });
-    return docRef.id;
-}
-export const addSugarLevel = async (email, sugarLevel) =>{
-    // Add a new document with a generated id.
-    const docRef = await addDoc(collection(db, "SugarLevel"), {
-        email: email,
-        reading: sugarLevel,
-        date: serverTimestamp()
-
-    });
-    return docRef.id;
-}
-export const addMedication = async (email, medication) =>{
-    // Add a new document with a generated id.
-    const docRef = await addDoc(collection(db, "Medication"), {
-        email: email,
-        medication: medication,
-        date: serverTimestamp()
     });
     return docRef.id;
 }

@@ -1,4 +1,4 @@
-import { profileUpdateUpdater, addBloodPressure, addSugarLevel, addMedication } from "../../firebase/builder";
+import { profileUpdateUpdater, addVitalChecks } from "../../firebase/builder";
 
 const handler = async (req, res) =>{
     if(req.method == 'POST'){
@@ -7,9 +7,9 @@ const handler = async (req, res) =>{
         //validate here
         try{
             let isProfileUpdated = await profileUpdateUpdater(userEmail, updateData)
-            let isBloodPressureAdded = await addBloodPressure(userEmail, bloodPressure)
-            let isSugarLevelAdded = await addSugarLevel(userEmail, sugarLevel)
-            let isMedicationAdded = await addMedication(userEmail, medication)
+            let isBloodPressureAdded = await addVitalChecks(userEmail, bloodPressure, 'BloodPressure')
+            let isSugarLevelAdded = await addVitalChecks(userEmail, sugarLevel, 'SugarLevel')
+            let isMedicationAdded = await addVitalChecks(userEmail, medication, 'Medications')
             if(isProfileUpdated && isBloodPressureAdded && isSugarLevelAdded && isMedicationAdded){
                 res.status(200).json({data: 'Updated'})
             }else{
