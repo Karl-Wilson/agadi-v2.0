@@ -152,7 +152,7 @@ const UpdaterFour = props =>{
                     </div>
                     <FormButtonContainer>
                         <Button Swidth="100%" Lwidth="50px" click={backBtnHandler}>Back</Button>
-                        <Button solid click={clickHandler}>Next</Button>
+                        <Button Swidth="100%" Lwidth="160px" solid click={clickHandler}>Next</Button>
                     </FormButtonContainer>
                 </Form>
             </FormWrapper>

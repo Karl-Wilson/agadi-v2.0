@@ -3,7 +3,7 @@ import {Label, Input, Select} from '../core/form/form'
 const DrugEntry = props =>{
     
     return(
-        <InputGroup>
+        <InputGroup FlexDirection="row">
             <FormGroup>
                 <Label mb="10px">Drug Name</Label>
                 <Input height="40px" name="drugName" id={`drugName${props.serial}`} data-serial={props.serial}/>
