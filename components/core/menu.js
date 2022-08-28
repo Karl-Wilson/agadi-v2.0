@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { dashboardPageCheck } from "../../utils/helper";
 const Wrapper = styled.div`
     width:  100%;
     height: 50px;
@@ -30,6 +32,7 @@ const MenuName = styled.p`
 `
 const Menu = props =>{
     const router = useRouter();
+    const dashboardPages = useSelector(state=>state.ui.dashboardPages)
     const url = router.query.pages
     const [active, setActive] = useState()
 
@@ -58,10 +61,15 @@ const Menu = props =>{
         if(active){
             document.getElementById(active).classList.remove('menuActive')
         }
-        if(url.length>1){        
-            let result = capitalizeFirstLetter(url[1]);
-            document.getElementById(`${result}Menu`).classList.add('menuActive')
-            setActive(result +'Menu');
+        if(url.length>1){ 
+            if(dashboardPageCheck(dashboardPages, url[1]) == false ){
+
+            }else{
+                let result = capitalizeFirstLetter(url[1]);
+                document.getElementById(`${result}Menu`).classList.add('menuActive')
+                setActive(result +'Menu');
+            }       
+
         }else{
             document.getElementById('DashboardMenu').classList.add('menuActive')
             setActive('DashboardMenu');
