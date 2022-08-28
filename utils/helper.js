@@ -55,3 +55,12 @@ export const isInputEmpty = (input) =>{
     }
     return false;
 }
+export const dashboardPageCheck = (pageList, currentPath) =>{
+    let path = false
+    pageList.map(value=>{
+        if(value == currentPath){
+            path = true;
+        }
+    })
+    return path
+} 
