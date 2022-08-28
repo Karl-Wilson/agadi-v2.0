@@ -4,10 +4,14 @@ import UpdaterOne from "../views/dashboard/profileUpdater/updaterOne";
 import UpdaterTwo from "../views/dashboard/profileUpdater/updaterTwo";
 import UpdaterThree from "../views/dashboard/profileUpdater/updaterThree";
 import UpdaterFour from "../views/dashboard/profileUpdater/updaterFour";
+import DashboardContent from "../views/dashboard/contentPage/dashboardContent";
+import ProfileContent from "../views/dashboard/contentPage/profileContent";
+import SettingsContent from "../views/dashboard/contentPage/settingsContent";
 import { useSelector } from "react-redux";
 import { userUrlBuilder } from "../utils/helper";
 import { useEffect } from "react";
 import {PageLoading} from '../components/core/loading/loading'
+import { dashboardPageCheck } from "../utils/helper";
 //any component with router must return <Loading/> component as default
 //to get reroute without displaying the current url components, decalre a variable outside the component to help track first time load
 
@@ -16,6 +20,10 @@ export const useDashboardRouter = () =>{
     const user = useSelector(state=>state.ui.user)
     const userUrl = user? userUrlBuilder(user.name): false
     const isProfileUpdated = useSelector(state=>state.ui.profileUpdate)
+    const path = router.query
+    const pageList = useSelector(state=>state.ui.dashboardPages)
+
+
     useEffect(() => {
         if(isProfileUpdated){
             //if loading, stop loading
@@ -23,10 +31,22 @@ export const useDashboardRouter = () =>{
         if(!isProfileUpdated && userUrl){
             router.replace(`/${userUrl}/profile-update`)
         }
-    }, [userUrl]);
+        if(path.pages.length > 2 && path.pages[1] == 'profile'){
+            router.replace(`/${userUrl}/profile`)
+        }
+        if(path.pages.length > 2 && path.pages[1] == 'settings'){
+            router.replace(`/${userUrl}/settings`)
+        }
+        if(dashboardPageCheck(pageList, path.pages[1]) == false && path.pages.length == 2 && userUrl){
+            router.replace(`/${userUrl}`)
+        }
+    }, [userUrl])
+    
     
     switch(router.query.pages[1]){
         case "profile-update": return <ProfileUpdater/>;
+        break;
+        default: return false;
     }
 }
 
@@ -53,7 +73,6 @@ export const useProfileUpdateRouter = () =>{
                 first = false
             }
     }, [userUrl, isProfileUpdated])
-    
 //to prevent current url on first load to display its component, declare first variable outsidde of the component 
 //to track first time load inorder to display loading when redirection is ongoing due to delay in rerouting 
 //when using useRouter();
@@ -72,8 +91,19 @@ export const useProfileUpdateRouter = () =>{
         break;
         }
     }
-        
-        
-        
+}
 
+export const useDisplayWindowRouter = () =>{
+    const router = useRouter();
+    const user = useSelector(state=>state.ui.user)
+    const userUrl = user? userUrlBuilder(user.name): false
+    const path = router.query
+
+    switch(path.pages[1]){
+        case 'profile': return <ProfileContent/>;
+        break;
+        case 'settings': return <SettingsContent/>;
+        break;
+        default: return <DashboardContent/>;
+    }
 }
