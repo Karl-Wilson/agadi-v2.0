@@ -1,7 +1,8 @@
 import { useDashboardRouter } from "../../router/router";
 import {PageWrapper} from '../../components/core/core'
 import {Sidebar, DashNav, DisplayWindow} from '../../components/layouts/layouts'
-
+import { useSelector } from "react-redux";
+import  {PageLoading} from '../../components/core/loading/loading'
 import styled from "styled-components";
 const MainPage = styled.div`
     display: flex;
@@ -20,6 +21,7 @@ const MainPage = styled.div`
     }
 `
 const Dashboard = props =>{
+    const isLoading = useSelector(state=>state.ui.loading)
     const component = useDashboardRouter();
     if(component){
         return component
@@ -29,7 +31,8 @@ const Dashboard = props =>{
             <Sidebar/>
             <MainPage>
                 <DashNav/>
-                <DisplayWindow/>
+                {isLoading && <PageLoading dashboard/>}
+                {!isLoading &&<DisplayWindow/>}
             </MainPage>
         </PageWrapper>
     )

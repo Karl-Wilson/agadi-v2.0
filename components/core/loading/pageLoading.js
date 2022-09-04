@@ -2,7 +2,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
     width: 100%;
     height: 100%;
-    background-color: #ffffff;
+    background-color: ${props=>props.dashboard? 'transparent' : "#ffffff"};
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -17,8 +17,8 @@ const Gif = styled.img`
     height: auto;
 `
 const PageLoading = props =>{
-    return <Wrapper>
-        <Gif src="/images/loader.gif"/>
+    return <Wrapper {...props}>
+        <Gif src="/images/loader.svg"/>
     </Wrapper>
 }
 export default PageLoading;

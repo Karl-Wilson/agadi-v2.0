@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import {CardHolder, IndicatorContainer} from '../containers/containers'
-import { useDisplayWindowRouter } from "../../router/router";
-import { useRouter } from "next/router";
+
 import {ContentContainer} from '../containers/containers'
 const Wrapper = styled.div`
     width: 100%;
-    height: auto;
+    height: 100%;
     position: relative;
     top: 88px;
     z-index: 1;
