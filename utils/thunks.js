@@ -1,5 +1,7 @@
 import { signIn } from "next-auth/react";
 import { uiAction } from "../store/reducers/uiReducer";
+import { dataAction } from "../store/reducers/dataReducer";
+import {getLatestData} from './helper'
 export const loginThunk = (data) =>{
     fetch('/api/login', { 
         method: 'POST', 
@@ -33,4 +35,19 @@ export const profileUpdaterThunk = (data, dispatch) =>{
             }
         });
  
+}
+export const fetchVitalsThunk = async (data, dispatch) =>{
+    const {addBloodPressure, addSugarLevel} = dataAction
+    fetch('/api/vitals', { 
+        method: 'POST', 
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)}).then(response => {return response.json(); }).then(data => {
+            if(data.data){
+                let bp = getLatestData(data.data.bloodPressure)
+                let sL = getLatestData(data.data.sugarLevel)
+                dispatch(addBloodPressure(bp))
+                dispatch(addSugarLevel(sL))
+                //loader
+            }      
+        });
 }

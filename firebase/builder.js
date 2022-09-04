@@ -82,3 +82,13 @@ export const addVitalChecks = async (email, reading, documentName) =>{
     });
     return docRef.id;
 }
+
+export const getUserVitals = async (email, vitals) =>{
+    let latest = [];
+    const q = query(collection(db, vitals), where("email", "==", email));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+       latest.push(doc.data())
+    });
+    return latest;
+}
