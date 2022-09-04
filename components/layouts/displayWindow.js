@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {ContentContainer} from '../containers/containers'
 const Wrapper = styled.div`
     width: 100%;
-    height: 100%;
+    height: auto;
     position: relative;
     top: 88px;
     z-index: 1;
