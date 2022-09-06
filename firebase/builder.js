@@ -92,3 +92,12 @@ export const getUserVitals = async (email, vitals) =>{
     });
     return latest;
 }
+export const getUserInfo = async (email) =>{
+    let user;
+    const q = query(collection(db, 'user'), where("email", "==", email));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+       user = doc.data()
+    });
+    return user;
+}

@@ -96,8 +96,8 @@ export const bloodPressureCalculator = (reading) =>{
         {condition: "High", color: "#820C00"},
         {condition: "Extreme", color: "#820C00"}
     ];
-    let data = reading.split(' ');
-    data = data[0].split('/')
+    //let data = reading.split(' ');
+    let data = reading.split('/')
     let systolic = parseInt(data[0])
     let diastolic = parseInt(data[1])
     
@@ -117,6 +117,7 @@ export const bloodPressureCalculator = (reading) =>{
             result = {condition: condition, color: value.color}
         }
     })
+
     return result;
 }
 export const sugarLevelCalculator = (reading, classification) =>{
@@ -127,8 +128,9 @@ export const sugarLevelCalculator = (reading, classification) =>{
         {condition: "Elevated", color: "#824100"},
         {condition: "High", color: "#820C00"}
     ];
-    let data = reading.split(' ');
-    data = parseInt(data[0]);
+    //let data = reading.split(' ');
+    //data = parseInt(data[0]);
+    let data = reading
 
     if(classification == 'fasting'){
         if(data < 70){
@@ -156,6 +158,42 @@ export const sugarLevelCalculator = (reading, classification) =>{
     colorCode.map(value=>{
         if(value.condition == condition){
             result = {condition: condition, color: value.color}
+        }
+    })
+    return result;
+}
+export const bmiCalculator = (height, weight, unit) =>{
+    let bmi, condition, result;
+    let colorCode = [
+        {condition: "Underweight", color: "#024150"},
+        {condition: "Normal", color: "#006216"},
+        {condition: "Overweight", color: "#824100"},
+        {condition: "Obese", color: "#820C00"}
+    ];
+
+    if(unit == 'metric'){
+        //BMI = weight (kg) / [height (m)]2
+        bmi = weight / (height*height);
+    }
+    if(unit == 'imperial'){
+        //BMI = 703 × weight (lbs) / [height (in)]2
+        bmi = 703 * (weight / (height*height));
+    }
+
+    if(bmi<=18.4){
+        condition = 'Underweight'
+    }else if(bmi>18.4 && bmi<25){
+        condition = 'Normal'
+    }
+    else if(bmi>=25 && bmi<30){
+        condition = 'Overweight'
+    }else if(bmi>=30){
+        condition = 'Obese'
+    }
+
+    colorCode.map(value=>{
+        if(value.condition == condition){
+            result = {condition: condition, color: value.color, reading: Math.round(bmi)}
         }
     })
     return result;

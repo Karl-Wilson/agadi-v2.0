@@ -9,6 +9,15 @@ const dataSlice = createSlice({
       },
       addSugarLevel: (state, action) => {
         state.sugarLevel = action.payload;
+      },
+      addHeight: (state, action) => {
+        state.height = action.payload;
+      },
+      addWeight: (state, action) => {
+        state.weight = action.payload;
+      },
+      addUnitMethod: (state, action) => {
+        state.unitMethod = action.payload;
       }
     },
   })

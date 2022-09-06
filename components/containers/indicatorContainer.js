@@ -44,7 +44,7 @@ const LabelReadingContainer = styled.div`
 
 const IndicatorContainer = props =>{
     return(
-            <Card bgColour="#024150" Swidth="300px" Sheight="110px" shadowless>
+            <Card bgColour={props.color||"#024150"} Swidth="300px" Sheight="110px" shadowless>
                 <Wrapper>
                     <HorizontalDivider>
                         <LabelReadingContainer>
