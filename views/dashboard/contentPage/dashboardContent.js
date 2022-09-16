@@ -2,9 +2,12 @@ import {CardHolder, IndicatorContainer} from '../../../components/containers/con
 import { bloodPressureCalculator, timeConverter, sugarLevelCalculator, bmiCalculator } from '../../../utils/helper';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import ChartContainer from '../../../components/containers/chartContainer';
 const DashboardContent = props =>{
     const bloodPressure = useSelector(state=>state.data.bloodPressure)
     const sugarLevel = useSelector(state=>state.data.sugarLevel)
+    const bloodPressureList = useSelector(state=>state.data.bloodPressureList)
+    const sugarLevelList = useSelector(state=>state.data.sugarLevelList)
     const unitMethod = useSelector(state=>state.data.unitMethod)
     const height = useSelector(state=>state.data.height)
     const weight = useSelector(state=>state.data.weight)
@@ -61,7 +64,11 @@ const DashboardContent = props =>{
             <CardHolder>
                 <IndicatorContainer label="Blood Pressure" reading={`${bpReading? bpReading: ''} mmHg`} indicator={bpIndicator? bpIndicator.condition : ''} color={bpIndicator? bpIndicator.color : ''} date={bpDate} time={bpTime}/>
                 <IndicatorContainer label="Sugar Level" reading={`${slReading? slReading:''} mm/dl`} indicator={slIndicator? slIndicator.condition : ''} color={slIndicator? slIndicator.color : ''} date={slDate} time={slTime}/>
-                <IndicatorContainer label="BMI" reading={BMI? BMI.reading: ''} indicator={BMI? BMI.condition: ''} date="12/07/2022" time="10:00AM"/>
+                <IndicatorContainer label="BMI" reading={BMI? BMI.reading: ''} indicator={BMI? BMI.condition: ''} color={BMI? BMI.color : ''} date="12/07/2022" time="10:00AM"/>
+            </CardHolder>
+            <CardHolder Lmt="24px">
+                <ChartContainer name="Blood Pressure" data={bloodPressureList} mr="24px" mt="24px"/>
+                <ChartContainer name="Sugar Level" data={sugarLevelList} mt="24px"/>
             </CardHolder>
         </>
     )

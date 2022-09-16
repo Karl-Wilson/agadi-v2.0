@@ -187,7 +187,7 @@ export const bmiCalculator = (height, weight, unit) =>{
     }
     else if(bmi>=25 && bmi<30){
         condition = 'Overweight'
-    }else if(bmi>=30){
+    }else if(bmi>30){
         condition = 'Obese'
     }
 

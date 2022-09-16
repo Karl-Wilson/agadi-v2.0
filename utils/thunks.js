@@ -37,14 +37,17 @@ export const profileUpdaterThunk = (data, dispatch) =>{
  
 }
 export const fetchVitalsThunk = async (data, dispatch) =>{
-    const {addBloodPressure, addSugarLevel, addHeight, addWeight, addUnitMethod} = dataAction
+    const {addBloodPressure, addSugarLevel, addHeight, addWeight, addUnitMethod, addBloodPressureList, addSugarLevelList} = dataAction
     fetch('/api/vitals', { 
         method: 'POST', 
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)}).then(response => {return response.json(); }).then(data => {
             if(data.data){
+
                 let bp = getLatestData(data.data.bloodPressure)
                 let sL = getLatestData(data.data.sugarLevel)
+                dispatch(addBloodPressureList(data.data.bloodPressure))
+                dispatch(addSugarLevelList(data.data.sugarLevel))
                 dispatch(addBloodPressure(bp))
                 dispatch(addSugarLevel(sL))
                 dispatch(addHeight(data.data.height))

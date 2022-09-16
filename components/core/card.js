@@ -6,6 +6,16 @@ const Wrapper = styled.div`
     padding: ${props=>props.padding||"15px"};
     box-shadow: ${props=>props.shadowless? '': "2px 2px 5px #cccccc"};
     border-radius: 10px;
+    margin-left: ${props=>props.Sml||''};
+    margin-right: ${props=>props.Smr||''};
+    margin-top: ${props=>props.Smt||''};
+    @media screen and (min-width: 992px) {
+        width: ${props=>props.Lwidth||props.Swidth||''};
+        height: ${props=>props.Lheight || props.Sheight||'auto'};
+        margin-left: ${props=>props.Lml || props.Sml ||''};
+        margin-right: ${props=>props.Lmr || props.Smr||''};
+        margin-top: ${props=>props.Lmt || props.Smt||''};
+    }
 `
 const Card = props =>{
     return <Wrapper {...props}/>

@@ -18,7 +18,13 @@ const dataSlice = createSlice({
       },
       addUnitMethod: (state, action) => {
         state.unitMethod = action.payload;
-      }
+      },
+      addBloodPressureList: (state, action) => {
+        state.bloodPressureList = action.payload;
+      },
+      addSugarLevelList: (state, action) => {
+        state.sugarLevelList = action.payload;
+      },
     },
   })
 

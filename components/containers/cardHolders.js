@@ -6,8 +6,10 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    margin-top: ${props=>props.Smt||''};
     @media screen and (min-width: 764px){
         flex-direction: row;
+        margin-top: ${props=>props.Lmt||props.Smt||''};
     }
 `
 const CardHolder = props =>{

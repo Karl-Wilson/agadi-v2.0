@@ -1,34 +1,35 @@
 import styled from "styled-components"
-import {Card} from '../core/core'
-const Wrapper = styled.div`
+import {Select} from '../core/form/form'
 
-`
-
-const Title = styled.p`
+export const Title = styled.p`
 font-family: Gilroy-Bold;
 font-size: 18px;
 `
 
-const Header = styled.div`
+export const Header = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
 ` 
-const Body = styled.div`
+export const Body = styled.div`
 
 `
-const CardContainer = ({children, ...props}) =>{
+export const CardContainer = props =>{
+
     return(
-        <Card>
+        <>
             <Header>
                 <Title>{props.title}</Title>
-                {children[0]}
+                {props.chart && <Select height="30px" padding="5px" onChange={chartDisplayHandler}>
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                    <option>Yearly</option>
+                </Select>}
             </Header>
             <Body>
-                {children[1]}
+                {props.children}
             </Body>
-        </Card>
+        </>
     )
 
 }
-export default CardContainer;

@@ -12,6 +12,7 @@ import SearchBar from "./searchBar";
 import IndicatorContainer from "./indicatorContainer";
 import CardHolder from "./cardHolders";
 import ContentContainer from "./contentContainer";
+import CardContainer from "./cardContainer";
 export {FormButtonContainer, FormGroup, FormInputContainer, FormTitleContainer, HeroareaContent, HeroareaImage, 
         InputGroup, PageContainer, HeightInputContainer, WeightInputContainer, BPInputContainer, DrugEntry, 
-        SearchBar, IndicatorContainer, CardHolder, ContentContainer}
+        SearchBar, IndicatorContainer, CardHolder, ContentContainer, CardContainer}

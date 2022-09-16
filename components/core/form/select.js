@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 const Wrapper = styled.select`
     width: ${props=>props.width||''};
-    height: 40px;
-    padding: 10px;
+    height: ${props=>props.height||'40px'};
+    padding: ${props=>props.padding||'10px'};
     border-radius: 10px;
     background-color: transparent;
     border: ${props=> props.error? '1px solid red':'1px solid #cccccc'};
