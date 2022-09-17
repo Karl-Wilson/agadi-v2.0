@@ -5,9 +5,10 @@ const handler = async(req, res) =>{
         try{
             let bloodPressure = await getUserVitals(email, 'BloodPressure')
             let sugarLevel = await getUserVitals(email, 'SugarLevel')
+            let medications = await getUserVitals(email, 'Medications')
             let userInfo = await getUserInfo(email)
             let {height, weight, unitMethod} = userInfo
-            res.status(200).json({data: {bloodPressure: bloodPressure, sugarLevel: sugarLevel, height: height, weight: weight, unitMethod: unitMethod}})
+            res.status(200).json({data: {bloodPressure: bloodPressure, sugarLevel: sugarLevel, height: height, weight: weight, unitMethod: unitMethod, medications: medications}})
         }catch(e){
             res.status(400).json({error: e.message})
         }

@@ -25,6 +25,9 @@ const dataSlice = createSlice({
       addSugarLevelList: (state, action) => {
         state.sugarLevelList = action.payload;
       },
+      addMedicationList: (state, action) => {
+        state.medicationList = action.payload;
+      },
     },
   })
 

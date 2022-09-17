@@ -198,3 +198,21 @@ export const bmiCalculator = (height, weight, unit) =>{
     })
     return result;
 }
+const getMedicationLevel = (duration, dosage, taken=0) =>{
+    if(!taken) return 0;
+    let takenLevel = (taken * 100) / (duration * dosage)
+    return Math.floor(takenLevel);
+}
+export const displayMedicationList = (arr) =>{
+    if(!arr) return null;
+    let result = []
+    arr.map(value=>{
+        value.reading.map(innerValue=>{
+            let duration = parseInt(innerValue.duration)
+            let dosage = parseInt(innerValue.dosage)
+            let taken = innerValue.taken? parseInt(innerValue.taken) : 0
+            result.push({title: innerValue.drugName, level: getMedicationLevel(duration, dosage, taken) })
+        }) 
+    })
+    return result
+}

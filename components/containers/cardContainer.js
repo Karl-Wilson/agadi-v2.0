@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import {Select} from '../core/form/form'
+
 
 export const Title = styled.p`
 font-family: Gilroy-Bold;
@@ -20,11 +20,6 @@ export const CardContainer = props =>{
         <>
             <Header>
                 <Title>{props.title}</Title>
-                {props.chart && <Select height="30px" padding="5px" onChange={chartDisplayHandler}>
-                    <option>Weekly</option>
-                    <option>Monthly</option>
-                    <option>Yearly</option>
-                </Select>}
             </Header>
             <Body>
                 {props.children}

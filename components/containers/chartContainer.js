@@ -1,11 +1,9 @@
-import styled from "styled-components";
 import MyChart from "../../chart/chart";
 import {Card} from '../core/core'
 import { Header, Body, Title } from "./cardContainer";
 import {Select} from '../core/form/form'
 import { useState } from "react";
 import {plotChart} from '../../chart/helper'
-import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
 

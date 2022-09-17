@@ -1,5 +1,5 @@
-import {CardHolder, IndicatorContainer} from '../../../components/containers/containers'
-import { bloodPressureCalculator, timeConverter, sugarLevelCalculator, bmiCalculator } from '../../../utils/helper';
+import {CardHolder, IndicatorContainer, MedicationContainer} from '../../../components/containers/containers'
+import { bloodPressureCalculator, timeConverter, sugarLevelCalculator, bmiCalculator, displayMedicationList } from '../../../utils/helper';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import ChartContainer from '../../../components/containers/chartContainer';
@@ -8,6 +8,7 @@ const DashboardContent = props =>{
     const sugarLevel = useSelector(state=>state.data.sugarLevel)
     const bloodPressureList = useSelector(state=>state.data.bloodPressureList)
     const sugarLevelList = useSelector(state=>state.data.sugarLevelList)
+    const medicaitonList = useSelector(state=>state.data.medicationList)
     const unitMethod = useSelector(state=>state.data.unitMethod)
     const height = useSelector(state=>state.data.height)
     const weight = useSelector(state=>state.data.weight)
@@ -20,7 +21,7 @@ const DashboardContent = props =>{
     const [slTime, setSLtime] = useState()
     const [slIndicator, setSLindicator] = useState()
     const [BMI, setBMI] = useState()
-    
+
     const unitMethodSelector = (height, weight, unitMethod) =>{
         let newHeight, newWeight;
         if(unitMethod == 'imperial'){
@@ -69,6 +70,9 @@ const DashboardContent = props =>{
             <CardHolder Lmt="24px">
                 <ChartContainer name="Blood Pressure" data={bloodPressureList} mr="24px" mt="24px"/>
                 <ChartContainer name="Sugar Level" data={sugarLevelList} mt="24px"/>
+            </CardHolder>
+            <CardHolder Smt="24px">
+                <MedicationContainer data={displayMedicationList(medicaitonList)}/>
             </CardHolder>
         </>
     )

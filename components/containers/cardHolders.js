@@ -7,7 +7,7 @@ const Wrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-top: ${props=>props.Smt||''};
-    @media screen and (min-width: 764px){
+    @media screen and (min-width: 992px){
         flex-direction: row;
         margin-top: ${props=>props.Lmt||props.Smt||''};
     }
