@@ -14,7 +14,7 @@ const InnerWrapper = styled.div`
 const DisplayWindow = props =>{
 
     return (
-        <Wrapper>
+        <Wrapper id="displayWindow">
             <ContentContainer/>
         </Wrapper>
     )

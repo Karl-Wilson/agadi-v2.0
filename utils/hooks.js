@@ -20,9 +20,9 @@ export const useMenuDropdown = (id) =>{
             })
         }
       }, [])
+
       const menuHandler = () =>{
           document.getElementById(id).classList.toggle('show')
-          console.log('clicked')
       }
       return menuHandler;
 }

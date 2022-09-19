@@ -29,7 +29,7 @@ const Dashboard = props =>{
     return(
         <PageWrapper justifyContent="flex-start">
             <Sidebar/>
-            <MainPage>
+            <MainPage id="mainPage">
                 <DashNav/>
                 {isLoading && <PageLoading dashboard/>}
                 {!isLoading &&<DisplayWindow/>}
