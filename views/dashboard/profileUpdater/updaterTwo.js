@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { profileUpdateAction } from '../../../store/reducers/profileUpdateReducer'
 import { useBackBtn } from '../../../utils/hooks'
 import {FormLoading} from '../../../components/core/loading/loading'
+import { useUpdaterTwo } from '../../../utils/hooks'
 const Form= styled.form`
     display: flex;
     flex-direction: column;
@@ -22,39 +23,11 @@ const Hint = styled.p`
 //reminder add onchange handler incase one decides to go back 
 
 const UpdaterTwo = props =>{
-    const [isLoading, setLoading] = useState(false);
     const router  = useRouter()
     const dispatch = useDispatch();
-    const bloodPressure = useSelector(state=>state.profileUpdate.bloodPressure)
-    const {addBloodPressure} = profileUpdateAction;
-    const [error, setError] = useState(false);
     const backBtnHandler = useBackBtn(props.userUrl, 1)
-
-    const readingValidation = (BP) =>{
-        if(BP){
-            let result = BP.split('/')
-            if(result.length <= 1 || isNaN(result[0]) || isNaN(result[1])){
-                setError('Please enter correct reading, eg 85/120. Also check hint below')
-                return false
-            }
-        
-        }else{
-            setError('Please enter blood pressure reading')
-            return false
-        }
-        return true
-    }
-    const errorHide = () =>{
-        if(error){
-            setError(false);
-        }
-        
-    }
-    const changeHandler = (e) =>{
-        let result  = e.target.value
-        dispatch(addBloodPressure(result))
-        console.log(result)
-    }
+    const [isLoading, setLoading, bloodPressure, error, setError, readingValidation, errorHide, changeHandler, addBloodPressure] = useUpdaterTwo()
+    
     const clickHandler = () =>{
         setLoading(true)
         //const bloodPressure = document.querySelector('input[name="bp"]').value

@@ -79,9 +79,7 @@ const DashNav = props =>{
         //to track scroll, you have to find the scroll element that makes it scroll and attach event
         document.getElementById('mainPage').addEventListener("scroll", scrollFunction);
         
-      return () => {
-        document.getElementById('mainPage').removeEventListener("scroll", scrollFunction);
-      }
+    
     }, [])
     
     const showSidebar = () =>{

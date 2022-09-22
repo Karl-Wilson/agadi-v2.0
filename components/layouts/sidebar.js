@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import {Menu, Logo}  from '../core/core'
+import {Menu, Logo, Button}  from '../core/core'
+import {uiAction} from '../../store/reducers/uiReducer'
+import { useDispatch } from "react-redux";
 const Wrapper = styled.div`
     width: 300px;
     height: 100%;
@@ -17,15 +19,32 @@ const Wrapper = styled.div`
         left: 0;
     }
 `
-const LogoWrapper = styled.div`
+const InnerWrapper = styled.div`
     width: 100%;
     display: flex;
     padding: 24px 50px;
 `
+const UpdateIcon = styled.img`
+    width: 20px;
+    height: auto;
+    margin-right: 20px;
+`
+
 const Sidebar = props =>{
+    const dispatch = useDispatch()
+    const {addUpdateModal} = uiAction
+    const updateHandler = (e) =>{
+        dispatch(addUpdateModal(true))
+    }
     return(
         <Wrapper id="sidebar">
-            <LogoWrapper><Logo/></LogoWrapper>
+            <InnerWrapper><Logo/></InnerWrapper>
+            <InnerWrapper>
+                <Button solid click={updateHandler} height="60px">
+                    <UpdateIcon src="/images/edit.svg"/>
+                    Update
+                </Button>
+            </InnerWrapper>
             <Menu name="Dashboard" icon="/images/dashboard_black.svg"/>
             <Menu name="Profile" icon="/images/dashboard_black.svg"/>
             <Menu name="Settings" icon="/images/dashboard_black.svg"/>

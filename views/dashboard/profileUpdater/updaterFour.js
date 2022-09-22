@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux'
 import { profileUpdaterThunk } from '../../../utils/thunks'
 import { useProfileUpdateFields } from '../../../utils/hooks'
 import {FormLoading} from '../../../components/core/loading/loading'
+import { useUpdateFour } from '../../../utils/hooks'
 //question to ask when optimizing, if this component develops a problem how do i find the problem
 //how do i isolate codes to aid in debugging
 
@@ -26,96 +27,15 @@ const AddBtnContainer = styled.div`
     flex-direction: row;
     justify-content: space-between;
 `
-let key = 0;
+
 const UpdaterFour = props =>{
+    const [isLoading, setLoading, field, setField, fieldValues, setFieldValues, addHandler, removeHandler, changeHandler, formValidator, errorDisplay, errorHide, inputClick] = useUpdateFour()
     const {addMedication} = profileUpdateAction;
     const router = useRouter();
     const dispatch = useDispatch();
     const backBtnHandler = useBackBtn(props.userUrl, 3);
-    const [isLoading, setLoading] = useState(false);
-    const [field, setField] = useState([<DrugEntry key={key} serial={key} />]);
-    const [fieldValues, setFieldValues] = useState([{serial: "0", drugName: '', duration: '', dosage: ''}]);
     const data = useProfileUpdateFields()
 
-    const addHandler = () =>{
-        ++key
-        let fields = field.concat(<DrugEntry key={key} serial={key} />)
-        let fieldValue = fieldValues.concat({serial: `${key}`, drugName: '', duration: '', dosage: ''})
-        setField(fields)
-        setFieldValues(fieldValue)
-        console.log(fields)
-        console.log(fieldValue)
-    }
-    const removeHandler = () =>{
-        let [...fields] = field;
-        let [...fieldValue] = fieldValues
-        if(fields.length>1){
-            --key
-            //for just fields
-            fields.splice(-1, 1);
-            setField(fields)
-            console.log(fields)
-            console.log(key)
-            //for field values
-            fieldValue.splice(-1, 1);
-            setFieldValues(fieldValue)
-            console.log(fieldValue)   
-        }
-        
-    }
-     
-    const changeHandler = (e, fieldValues) =>{
-        let serial = e.target.getAttribute('data-serial')
-        let name = e.target.getAttribute('name')
-        let value = e.target.value
-        let [...fieldValue] = fieldValues
-
-        fieldValue.map(valueArray=>{
-            if(valueArray.serial == serial){
-                if(name == 'drugName'){
-                    valueArray.drugName = value
-                }else if(name == 'dosage'){
-                    valueArray.dosage = value
-                }else{
-                    valueArray.duration = value
-                }
-
-            }
-        })
-    }
-    const formValidator  = (fieldValues) =>{
-        let error = []
-        fieldValues.map(valueArray=>{
-            if(isInputEmpty(valueArray.drugName)){
-                error.push({name: 'drugName', serial: valueArray.serial})
-            }else if(!isInputString(valueArray.drugName)){
-                error.push({name: 'drugName', serial: valueArray.serial})
-            }
-            if(isInputEmpty(valueArray.dosage)){
-                error.push({name: 'dosage', serial: valueArray.serial})
-            }
-            if(isInputEmpty(valueArray.duration)){
-                error.push({name: 'duration', serial: valueArray.serial})
-            }else if(!isInputInteger(valueArray.duration)){
-                error.push({name: 'duration', serial: valueArray.serial})
-            }
-        })
-        return error;
-    }
-    const errorDisplay = (error) =>{
-        error.map(valueArray=>{
-            document.querySelector(`#${valueArray.name}${valueArray.serial}`).style.border = "1px solid red";
-        })
-    }
-    const errorHide = (error) =>{
-        error.map(valueArray=>{
-            document.querySelector(`#${valueArray.name}${valueArray.serial}`).style.border = "1px solid #cccccc";
-        })
-    }
-    const inputClick = () =>{
-        let result = formValidator(fieldValues)
-        errorHide(result)
-    }
     const clickHandler = () =>{
         setLoading(true)
         let result = formValidator(fieldValues)
@@ -123,9 +43,7 @@ const UpdaterFour = props =>{
             //console.log(data(fieldValues))
             dispatch(addMedication(fieldValues))
             //send to database
-
-           profileUpdaterThunk(data(fieldValues), dispatch)
-            
+           profileUpdaterThunk(data(fieldValues), dispatch)    
         }else{
             errorDisplay(result)
             setLoading(false)

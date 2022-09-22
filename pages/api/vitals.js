@@ -1,4 +1,4 @@
-import {getUserVitals, getUserInfo} from '../../firebase/builder'
+import {getUserVitals, getUserInfo, addVitalChecks} from '../../firebase/builder'
 const handler = async(req, res) =>{
     if(req.method == 'POST'){
         const {email} = req.body
@@ -12,9 +12,16 @@ const handler = async(req, res) =>{
         }catch(e){
             res.status(400).json({error: e.message})
         }
-    }else{
-        
-        
+    }
+    
+    if(req.method == 'PUT'){
+        const {reading, email, document} = req.body
+        try{
+            let result = await addVitalChecks(email, reading, document)
+            res.status(200).json({data: 'success'})
+        }catch(e){
+            res.status(400).json({error: e.message})
+        }        
     }
 }
 export default handler;

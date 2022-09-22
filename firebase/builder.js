@@ -78,7 +78,6 @@ export const addVitalChecks = async (email, reading, documentName) =>{
         email: email,
         reading: reading,
         date: serverTimestamp()
-
     });
     return docRef.id;
 }

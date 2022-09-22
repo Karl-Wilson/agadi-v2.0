@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 const Wrapper = styled.div`
     width: ${props=>props.Swidth||'160px'};
-    height: 40px;
+    height: ${props=>props.height||'40px'};
     padding: 10px 30px;
     padding-top: ${props=>props.pt||'10px'};
     padding-bottom: ${props=>props.pb||'10px'};

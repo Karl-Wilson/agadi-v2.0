@@ -1,3 +1,4 @@
 import FormLoading from "./formLoading";
 import PageLoading from "./pageLoading";
-export {FormLoading, PageLoading}
+import UpdateLoading from "./updateLoading";
+export {FormLoading, PageLoading, UpdateLoading}

@@ -8,6 +8,7 @@ import {FormWrapper, Label, FormErrorDisplay} from '../../../components/core/for
 import {FormTitleContainer, FormButtonContainer, BPInputContainer, FormInputContainer, FormGroup} from '../../../components/containers/containers'
 import { profileUpdateAction } from '../../../store/reducers/profileUpdateReducer'
 import {FormLoading} from '../../../components/core/loading/loading'
+import { useUpdateThree } from '../../../utils/hooks'
 const Form= styled.form`
     display: flex;
     flex-direction: column;
@@ -15,38 +16,11 @@ const Form= styled.form`
     height: 100%;
 `
 const UpdaterThree = props =>{
+    const [sugarLevel, addSugarLevel, error, setError, isLoading, setLoading, readingValidation, errorHide, changeHandler] = useUpdateThree()
     const router = useRouter()
     const dispatch = useDispatch();
-    const sugarLevel = useSelector(state=>state.profileUpdate.sugarLevel)
-    const {addSugarLevel} = profileUpdateAction;
-    const [error, setError] = useState(false);
-    const [isLoading, setLoading] = useState(false);
     const backBtnHandler = useBackBtn(props.userUrl, 2)
     
-    const readingValidation = (sugarLevel) =>{
-        if(sugarLevel){
-            if(isNaN(sugarLevel)){
-                setError('Please enter correct reading')
-                return false
-            }
-        
-        }else{
-            setError('Please enter sugar level reading')
-            return false
-        }
-        return true
-    }
-    const errorHide = () =>{
-        if(error){
-            setError(false);
-        }
-        
-    }
-    const changeHandler = (e) =>{
-        let result  = e.target.value
-        dispatch(addSugarLevel(result))
-        console.log(result)
-    }
     const clickHandler = () =>{
         setLoading(true)
         let isValid = readingValidation(sugarLevel)

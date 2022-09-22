@@ -5,4 +5,5 @@ import PageInnerWrapper from "./pageInnerWrapper";
 import Dropdown from "./dropdown";
 import Menu from "./menu";
 import Card from "./card";
-export {Button, Logo, PageWrapper, PageInnerWrapper, Dropdown, Menu, Card};
+import Modal from "./modal";
+export {Button, Logo, PageWrapper, PageInnerWrapper, Dropdown, Menu, Card, Modal};

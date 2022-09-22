@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import { isInputInteger } from "./helper"
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
+import { isInputInteger, isInputEmpty, isInputString } from "./helper"
+import { useSelector, useDispatch } from "react-redux"
 import { profileUpdateAction } from "../store/reducers/profileUpdateReducer"
+import {DrugEntry} from  '../components/containers/containers'
+
 export const useMenuDropdown = (id) =>{
     useEffect(() => {
         window.addEventListener('resize', function(){
@@ -198,4 +199,150 @@ export const useProfileUpdateFields = () =>{
     return data;
     }
     return data;
+}
+
+export const useUpdaterTwo = () =>{
+    const [isLoading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const bloodPressure = useSelector(state=>state.profileUpdate.bloodPressure)
+    const {addBloodPressure} = profileUpdateAction;
+    const [error, setError] = useState(false);
+
+    const readingValidation = (BP) =>{
+        if(BP){
+            let result = BP.split('/')
+            if(result.length <= 1 || isNaN(result[0]) || isNaN(result[1])){
+                setError('Please enter correct reading, eg 85/120. Also check hint below')
+                return false
+            }
+        
+        }else{
+            setError('Please enter blood pressure reading')
+            return false
+        }
+        return true
+    }
+    const errorHide = () =>{
+        if(error){
+            setError(false);
+        }
+    }
+    const changeHandler = (e) =>{
+        let result  = e.target.value
+        dispatch(addBloodPressure(result))
+    }
+ 
+    return [isLoading, setLoading, bloodPressure, error, setError, readingValidation, errorHide, changeHandler, addBloodPressure]
+}
+export const useUpdateThree = () =>{
+    const sugarLevel = useSelector(state=>state.profileUpdate.sugarLevel)
+    const {addSugarLevel} = profileUpdateAction;
+    const [error, setError] = useState(false);
+    const [isLoading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    
+    const readingValidation = (sugarLevel) =>{
+        if(sugarLevel){
+            if(isNaN(sugarLevel)){
+                setError('Please enter correct reading')
+                return false
+            }
+        
+        }else{
+            setError('Please enter sugar level reading')
+            return false
+        }
+        return true
+    }
+    const errorHide = () =>{
+        if(error){
+            setError(false);
+        } 
+    }
+    const changeHandler = (e) =>{
+        let result  = e.target.value
+        dispatch(addSugarLevel(result))
+    }
+    return [sugarLevel, addSugarLevel, error, setError, isLoading, setLoading, readingValidation, errorHide, changeHandler]
+}
+
+let key = 0;
+export const useUpdateFour = () =>{
+    const [isLoading, setLoading] = useState(false);
+    const [field, setField] = useState([<DrugEntry key={key} serial={key} />]);
+    const [fieldValues, setFieldValues] = useState([{serial: "0", drugName: '', duration: '', dosage: ''}]);
+
+    const addHandler = () =>{
+        ++key
+        let fields = field.concat(<DrugEntry key={key} serial={key} />)
+        let fieldValue = fieldValues.concat({serial: `${key}`, drugName: '', duration: '', dosage: ''})
+        setField(fields)
+        setFieldValues(fieldValue)
+    }
+    const removeHandler = () =>{
+        let [...fields] = field;
+        let [...fieldValue] = fieldValues
+        if(fields.length>1){
+            --key
+            //for just fields
+            fields.splice(-1, 1);
+            setField(fields)
+            //for field values
+            fieldValue.splice(-1, 1);
+            setFieldValues(fieldValue) 
+        }
+    }
+    const changeHandler = (e, fieldValues) =>{
+        let serial = e.target.getAttribute('data-serial')
+        let name = e.target.getAttribute('name')
+        let value = e.target.value
+        let [...fieldValue] = fieldValues
+
+        fieldValue.map(valueArray=>{
+            if(valueArray.serial == serial){
+                if(name == 'drugName'){
+                    valueArray.drugName = value
+                }else if(name == 'dosage'){
+                    valueArray.dosage = value
+                }else{
+                    valueArray.duration = value
+                }
+            }
+        })
+    }
+    const formValidator  = (fieldValues) =>{
+        let error = []
+        fieldValues.map(valueArray=>{
+            if(isInputEmpty(valueArray.drugName)){
+                error.push({name: 'drugName', serial: valueArray.serial})
+            }else if(!isInputString(valueArray.drugName)){
+                error.push({name: 'drugName', serial: valueArray.serial})
+            }
+            if(isInputEmpty(valueArray.dosage)){
+                error.push({name: 'dosage', serial: valueArray.serial})
+            }
+            if(isInputEmpty(valueArray.duration)){
+                error.push({name: 'duration', serial: valueArray.serial})
+            }else if(!isInputInteger(valueArray.duration)){
+                error.push({name: 'duration', serial: valueArray.serial})
+            }
+        })
+        return error;
+    }
+    const errorDisplay = (error) =>{
+        error.map(valueArray=>{
+            document.querySelector(`#${valueArray.name}${valueArray.serial}`).style.border = "1px solid red";
+        })
+        console.log(error)
+    }
+    const errorHide = (error) =>{
+        error.map(valueArray=>{
+            document.querySelector(`#${valueArray.name}${valueArray.serial}`).style.border = "1px solid #cccccc";
+        })
+    }
+    const inputClick = () =>{
+        let result = formValidator(fieldValues)
+        errorHide(result)
+    }
+    return [isLoading, setLoading, field, setField, fieldValues, setFieldValues, addHandler, removeHandler, changeHandler, formValidator, errorDisplay, errorHide, inputClick]
 }

@@ -38,12 +38,12 @@ export const profileUpdaterThunk = (data, dispatch) =>{
 }
 export const fetchVitalsThunk = async (data, dispatch) =>{
     const {addBloodPressure, addSugarLevel, addHeight, addWeight, addUnitMethod, addBloodPressureList, addSugarLevelList, addMedicationList} = dataAction
+    const {addIsUpdated, addLoading} = uiAction
     fetch('/api/vitals', { 
         method: 'POST', 
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)}).then(response => {return response.json(); }).then(data => {
             if(data.data){
-
                 let bp = getLatestData(data.data.bloodPressure)
                 let sL = getLatestData(data.data.sugarLevel)
                 dispatch(addBloodPressureList(data.data.bloodPressure))
@@ -54,7 +54,35 @@ export const fetchVitalsThunk = async (data, dispatch) =>{
                 dispatch(addWeight(data.data.weight))
                 dispatch(addUnitMethod(data.data.unitMethod))
                 dispatch(addMedicationList(data.data.medications))
+                dispatch(addIsUpdated(false))
+                dispatch(addLoading(false))
                 //loader
             }      
+        });
+}
+
+export const UpdateVitalsThunk = (data, dispatch, callback) =>{
+    const {addIsUpdated, addUpdateLoad, addLoading, addIsUpdateSuccessful} = uiAction
+    dispatch(addIsUpdateSuccessful(false))
+    dispatch(addUpdateLoad(true))
+    fetch('/api/vitals', { 
+        method: 'PUT', 
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)}).then(response => {return response.json(); }).then(data => {
+            if(data.data){
+                //below triggers update
+                dispatch(addIsUpdateSuccessful(true))
+                setTimeout(function(){                    
+                    dispatch(addLoading(true))
+                    callback()
+                    dispatch(addIsUpdated(true))
+                    dispatch(addUpdateLoad(false))
+                }, 1000);
+                
+                //turn off loading in fetchVitalsThunk
+            }else if(data.error){
+                dispatch(addIsUpdateSuccessful(false))
+                dispatch(addUpdateLoad(false))
+            }  
         });
 }

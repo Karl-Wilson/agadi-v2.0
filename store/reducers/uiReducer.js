@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const uiSlice = createSlice({
     name: 'UI',
-    initialState: {loading: false, dashboardPages: ['profile-update', 'profile', 'settings']},
+    initialState: {loading: true, dashboardPages: ['profile-update', 'profile', 'settings'], 
+    updateModal: false, isUpdated: false, isUpdateSuccessful: false },
     reducers: {
       addLoading: (state, action) => {
         state.loading = action.payload;
@@ -15,6 +16,18 @@ const uiSlice = createSlice({
       },
       addDashboardPages: (state, action) =>{
         state.dashboardPages = action.payload;
+      },
+      addUpdateModal: (state, action) =>{
+        state.updateModal = action.payload;
+      },
+      addIsUpdated: (state, action) =>{
+        state.isUpdated = action.payload;
+      },
+      addUpdateLoad: (state, action) =>{
+        state.updateLoad = action.payload;
+      },
+      addIsUpdateSuccessful: (state, action) =>{
+        state.isUpdateSuccessful = action.payload;
       }
     },
   })

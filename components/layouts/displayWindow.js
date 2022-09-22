@@ -1,6 +1,6 @@
 import styled from "styled-components";
-
 import {ContentContainer} from '../containers/containers'
+
 const Wrapper = styled.div`
     width: 100%;
     height: auto;
