@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { dashboardPageCheck } from "../../utils/helper";
+import {showSidebar} from '../layouts/sidebar'
 const Wrapper = styled.div`
     width:  100%;
     height: 50px;
@@ -47,7 +48,7 @@ const Menu = props =>{
             let page = props.name.toLowerCase()
             router.push(`/${url[0]}/${page}`)       
         }
-
+        if(window.innerWidth<992) showSidebar()
     }   
     const capitalizeFirstLetter = (word) =>{
         let uppercase, lowercase, result;

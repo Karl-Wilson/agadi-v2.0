@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { userNameSeparator } from "../../utils/helper";
 import { useState } from "react";
+import {showSidebar} from './sidebar'
 const Wrapper = styled.nav`
     width: calc(100% - 40px);
     display: flex;
@@ -82,9 +83,6 @@ const DashNav = props =>{
     
     }, [])
     
-    const showSidebar = () =>{
-        document.getElementById('sidebar').classList.toggle('showSidebar');
-    }
     const signoutHandler = () =>{
         signOut({redirect: false});
         router.push('/login')
