@@ -73,12 +73,14 @@ const MedicationContainer = (props) =>{
         <Card Swidth="80%" Lwidth="auto">
             <CardContainer title="Medication">
                 {!props.data || !props.data.length && <NoData><p>No Data</p></NoData>}
+                
                 {props.data && <Grid>
                     {props.data.map(value=>{
-                        return <Drugs title={value.title} level={value.level}/>
+                        if(value.level != 100) return <Drugs title={value.title} level={value.level}/>
                     }
                     )}
                 </Grid>}
+                
             </CardContainer>
 
         </Card>
