@@ -8,6 +8,7 @@ import {uiAction} from '../../store/reducers/uiReducer'
 import { useUpdaterTwo, useUpdateThree, useUpdateFour } from "../../utils/hooks"
 import { UpdateVitalsThunk } from "../../utils/thunks"
 import {UpdateLoading} from '../core/loading/loading'
+import { clearUpdateModalForm } from "../../utils/helper"
 
 const Wrapper = styled.div`
     width: 100%;
@@ -106,6 +107,8 @@ const useCloseModal = () =>{
     const {addUpdateModal} = uiAction
     const closeModalHandler = () =>{
         dispatch(addUpdateModal(false))
+        clearUpdateModalForm(dispatch)
+
     }
     return [closeModalHandler, dispatch]
 }

@@ -1,7 +1,7 @@
 import { signIn } from "next-auth/react";
 import { uiAction } from "../store/reducers/uiReducer";
 import { dataAction } from "../store/reducers/dataReducer";
-import {getLatestData} from './helper'
+import {getLatestData, clearUpdateModalForm} from './helper'
 export const loginThunk = (data) =>{
     fetch('/api/login', { 
         method: 'POST', 
@@ -77,6 +77,7 @@ export const UpdateVitalsThunk = (data, dispatch, callback) =>{
                     callback()
                     dispatch(addIsUpdated(true))
                     dispatch(addUpdateLoad(false))
+                    clearUpdateModalForm(dispatch)
                 }, 1000);
                 
                 //turn off loading in fetchVitalsThunk

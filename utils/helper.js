@@ -1,3 +1,4 @@
+import { profileUpdateAction } from "../store/reducers/profileUpdateReducer"
 export const userUrlBuilder = (name) =>{
     if(name){
         let smallLetters = name.toLowerCase()
@@ -215,4 +216,9 @@ export const displayMedicationList = (arr) =>{
         }) 
     })
     return result
+}
+export const clearUpdateModalForm = (dispatch) =>{
+    const {addBloodPressure, addSugarLevel} = profileUpdateAction
+    dispatch(addBloodPressure(''))
+    dispatch(addSugarLevel(''))
 }
