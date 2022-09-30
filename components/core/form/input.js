@@ -12,7 +12,7 @@ const Wrapper = styled.input`
         }
         return '1px solid #cccccc'}
     };
-    border-radius: 10px;
+    border-radius: ${props=>props.NoBorderRadius? '': '10px'};
     font-family: Gilroy-Light;
     margin-right: ${props=>props.Smr||''};
     margin-left: ${props=>props.Sml||''};

@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     border: ${props=> props.transparent? '2px solid #024150': ''};
     color: ${props=> props.solid? '#ffffff' : '#024150'};
     font-family: ${props=> (props.solid || props.transparent||props.bold)? 'Gilroy-Bold': ''};
-    font-size: 16px;
+    font-size: ${props=>props.fontSize || '16px'};
     cursor: pointer;
     border-radius: 20px;
     display: flex;

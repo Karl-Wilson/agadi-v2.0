@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const uiSlice = createSlice({
     name: 'UI',
     initialState: {loading: true, dashboardPages: ['profile-update', 'profile', 'settings'], 
-    updateModal: false, isUpdated: false, isUpdateSuccessful: false },
+    updateModal: false, isUpdated: false, isUpdateSuccessful: false, showDosageUpdateModal: false },
     reducers: {
       addLoading: (state, action) => {
         state.loading = action.payload;
@@ -28,6 +28,9 @@ const uiSlice = createSlice({
       },
       addIsUpdateSuccessful: (state, action) =>{
         state.isUpdateSuccessful = action.payload;
+      },
+      addShowDosageUpdateModal: (state, action) =>{
+        state.showDosageUpdateModal = action.payload;
       }
     },
   })

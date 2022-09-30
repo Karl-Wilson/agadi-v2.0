@@ -1,6 +1,9 @@
-import {Card} from '../core/core'
-import {CardContainer} from './containers'
 import styled from 'styled-components'
+import {Card} from '../core/core'
+import { Header, Body, Title } from './cardContainer'
+import {Button} from '../core/core'
+import { useDispatch } from 'react-redux'
+import { uiAction } from '../../store/reducers/uiReducer'
 const DrugWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -53,6 +56,9 @@ const NoData = styled.div`
         color: #cccccc;
     }
 `
+const EditBtn = styled.div`
+
+`
 const Drugs = props =>{
     return(
         <DrugWrapper>
@@ -69,19 +75,28 @@ const Drugs = props =>{
     )
 }
 const MedicationContainer = (props) =>{
+    const dispatch = useDispatch()
+    const {addShowDosageUpdateModal} = uiAction
+    const clickHandler = () =>{
+        dispatch(addShowDosageUpdateModal(true))
+    }
     return(
         <Card Swidth="80%" Lwidth="auto">
-            <CardContainer title="Medication">
+            <Header>
+                <Title>Medications</Title>
+                <Button transparent Swidth="80px" height="25px" fontSize="14px" click={clickHandler}>Edit</Button>
+            </Header>
+            <Body>
                 {!props.data || !props.data.length && <NoData><p>No Data</p></NoData>}
                 
                 {props.data && <Grid>
-                    {props.data.map(value=>{
-                        if(value.level != 100) return <Drugs title={value.title} level={value.level}/>
+                    {props.data.map((value, index)=>{
+                        if(value.level != 100) return <Drugs key={index+'d'+index} title={value.title} level={value.level}/>
                     }
                     )}
                 </Grid>}
                 
-            </CardContainer>
+            </Body>
 
         </Card>
     )

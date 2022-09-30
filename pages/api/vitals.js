@@ -1,4 +1,4 @@
-import {getUserVitals, getUserInfo, addVitalChecks} from '../../firebase/builder'
+import {getUserVitals, getUserInfo, addVitalChecks, updateDrugTaken} from '../../firebase/builder'
 const handler = async(req, res) =>{
     if(req.method == 'POST'){
         const {email} = req.body
@@ -15,13 +15,23 @@ const handler = async(req, res) =>{
     }
     
     if(req.method == 'PUT'){
-        const {reading, email, document} = req.body
-        try{
-            let result = await addVitalChecks(email, reading, document)
-            res.status(200).json({data: 'success'})
-        }catch(e){
-            res.status(400).json({error: e.message})
-        }        
+        if(req.body.alreadyTakenUpdate){
+            const {drugName, taken, email} = req.body
+            try{
+                await updateDrugTaken(drugName, taken, email)
+                res.status(200).json({data: 'success'})
+            }catch(e){
+                res.status(400).json({error: e.message})
+            }  
+        }else{
+            const {reading, email, document} = req.body
+            try{
+                let result = await addVitalChecks(email, reading, document)
+                res.status(200).json({data: 'success'})
+            }catch(e){
+                res.status(400).json({error: e.message})
+            }  
+        }         
     }
 }
 export default handler;

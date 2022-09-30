@@ -10,7 +10,7 @@ import { UpdateVitalsThunk } from "../../utils/thunks"
 import {UpdateLoading} from '../core/loading/loading'
 import { clearUpdateModalForm } from "../../utils/helper"
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
     width: 100%;
     height: auto;
     @media screen and (min-width: 768px){
@@ -18,7 +18,7 @@ const Wrapper = styled.div`
         height: auto;
     }
 `
-const Header = styled.div`
+export const Header = styled.div`
     width: 100%;
     height: 60px;
     background-color: #024150;
@@ -45,7 +45,7 @@ const InnerHeader = styled.div`
     position: relative;
     z-index: 20;
 `
-const NavButtons = styled.p`
+export const NavButtons = styled.p`
     font-family: Gilroy-Bold;
     font-size: 20px;
     color: #ffffff;
@@ -70,7 +70,7 @@ const ActiveNav = styled.div`
     z-index: 20;
 
 `
-const Body = styled.div`
+export const Body = styled.div`
     width: 100%;
     height: auto;
     display: flex;
@@ -85,7 +85,7 @@ const Body = styled.div`
     }
     
 `
-const Form= styled.form`
+export const Form= styled.form`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -96,23 +96,22 @@ const Hint = styled.p`
  font-size: 14px;
  margin-top: 10px;
 `
-const AddBtnContainer = styled.div`
+export const AddBtnContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 `
-const useCloseModal = () =>{
+export const useCloseModal = () =>{
     const dispatch = useDispatch()
     const {addUpdateModal} = uiAction
     const closeModalHandler = () =>{
         dispatch(addUpdateModal(false))
         clearUpdateModalForm(dispatch)
-
     }
     return [closeModalHandler, dispatch]
 }
-const ButtonContainer = props =>{
+export const ButtonContainer = props =>{
         return(
         <FormButtonContainer>
             <Button Swidth="100%" Lwidth="50px" click={props.cancel}>Cancel</Button>

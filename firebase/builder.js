@@ -1,4 +1,4 @@
-import {collection, query, where, getDocs, addDoc, doc, updateDoc, serverTimestamp } from 'firebase/firestore'
+import {collection, query, where, getDocs, addDoc, doc, serverTimestamp, updateDoc } from 'firebase/firestore'
 import db from './config';
 export const loginBuilder = async (email, password) =>{
     let user;
@@ -80,6 +80,34 @@ export const addVitalChecks = async (email, reading, documentName) =>{
         date: serverTimestamp()
     });
     return docRef.id;
+}
+export const updateDrugTaken = async (drugName, taken, email) =>{
+    // Add a new document with a generated id.
+    let result = []
+    let indexes = []
+    const q = query(collection(db, 'Medications'), where("email", "==", email));
+    const querySnapshot = await getDocs(q);
+    
+    querySnapshot.forEach((doc) => {
+       result.push(doc.data())
+       indexes.push(doc.id)
+    });
+    let returnedReading, docIdIndex
+
+    result.map((outerElem, index)=>{
+        outerElem.reading.map(innerElem=>{
+            if(innerElem.drugName == drugName){
+                innerElem.taken = taken
+                returnedReading = outerElem.reading
+                docIdIndex = index
+            }
+        })
+    })
+
+    await updateDoc(doc(db, "Medications", indexes[docIdIndex]), {
+        "reading": returnedReading,
+    });
+    
 }
 
 export const getUserVitals = async (email, vitals) =>{

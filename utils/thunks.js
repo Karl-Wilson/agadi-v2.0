@@ -71,7 +71,7 @@ export const UpdateVitalsThunk = (data, dispatch, callback) =>{
         body: JSON.stringify(data)}).then(response => {return response.json(); }).then(data => {
             if(data.data){
                 //below triggers update
-                dispatch(addIsUpdateSuccessful(true))
+               dispatch(addIsUpdateSuccessful(true))
                 setTimeout(function(){                    
                     dispatch(addLoading(true))
                     callback()
@@ -80,6 +80,29 @@ export const UpdateVitalsThunk = (data, dispatch, callback) =>{
                     clearUpdateModalForm(dispatch)
                 }, 1000);
                 
+                //turn off loading in fetchVitalsThunk
+            }else if(data.error){
+                dispatch(addIsUpdateSuccessful(false))
+                dispatch(addUpdateLoad(false))
+            }  
+        });
+}
+export const UpdateMedThunk = (data, dispatch, callback) =>{
+    const {addIsUpdated, addUpdateLoad, addLoading, addIsUpdateSuccessful, addShowDosageUpdateModal} = uiAction
+    dispatch(addIsUpdateSuccessful(false))
+    dispatch(addUpdateLoad(true))
+    fetch('/api/vitals', { 
+        method: 'PUT', 
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)}).then(response => {return response.json(); }).then(data => {
+            if(data.data){
+                console.log(data.data)
+                dispatch(addIsUpdateSuccessful(true))
+                setTimeout(function(){                    
+                    dispatch(addLoading(true))
+                    dispatch(addIsUpdated(true))
+                    dispatch(addUpdateLoad(false))
+                }, 1000);
                 //turn off loading in fetchVitalsThunk
             }else if(data.error){
                 dispatch(addIsUpdateSuccessful(false))
