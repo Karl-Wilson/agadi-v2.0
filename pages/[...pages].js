@@ -5,19 +5,34 @@ import { useDispatch } from "react-redux";
 import { uiAction } from "../store/reducers/uiReducer";
 import { useEffect } from "react";
 import { userUrlBuilder } from "../utils/helper";
-import { profileUpdateChecker } from "../firebase/builder";
+import { profileUpdateChecker, getBasicUserInfo } from "../firebase/builder";
 import {PageLoading} from '../components/core/loading/loading'
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
 const PageRouter = props =>{
     const router = useRouter();
     const dispatch = useDispatch()
     const path = router.query;    
-    let user = userUrlBuilder(props.session.name);
-    const {addUser, addProfileUpdate} = uiAction;
+    let [user, setUser] = useState();
+    const {addUser, addProfileUpdate, addUserProfileUpdate} = uiAction;
+    const userDataFromRedux = useSelector(state=>state.ui.user)
+    const userProfileUpdate = useSelector(state=>state.ui.userProfileUpdate)
+    
     useEffect(() => {
-        dispatch(addUser(props.session))    
-        dispatch(addProfileUpdate(props.isProfileUpdated))
-    }, [])
+        if(!userDataFromRedux){
+            setUser(userUrlBuilder(props.session.name))
+            dispatch(addUser(props.session))    
+            dispatch(addProfileUpdate(props.isProfileUpdated))
+        }else{
+            if(userProfileUpdate){
+                router.replace(`/${userUrlBuilder(userDataFromRedux.name)}/profile`)
+                setUser(userUrlBuilder(userDataFromRedux.name))
+                dispatch(addUserProfileUpdate(false));
+            } 
+        }
+    }, [userDataFromRedux])
+
     
     if(path.pages){
            switch(path.pages[0]){
@@ -33,7 +48,7 @@ const PageRouter = props =>{
             break;
             case '404': return <div>404 page</div>;
             break;
-            default: return <div>404 page</div>;
+            default: return <PageLoading/>;
             } 
     }else{
         return <PageLoading/>
@@ -45,10 +60,12 @@ export async function getServerSideProps(context) {
      //must pass context param to getSession else it wont work
     let session = await getSession(context)
     const url = context.req.url
-    let user, profileUpdate;
+    let user, profileUpdate, basicUserInfo, userId;
     if(session){
-        user = session.user
-        profileUpdate = await profileUpdateChecker(session.user.email)
+        userId = session.user.name
+        basicUserInfo = await getBasicUserInfo(userId);
+        user = {...basicUserInfo, id: userId};
+        profileUpdate = await profileUpdateChecker(userId)
     }else{
         user = ''
         profileUpdate = ''

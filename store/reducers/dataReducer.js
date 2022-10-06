@@ -28,6 +28,15 @@ const dataSlice = createSlice({
       addMedicationList: (state, action) => {
         state.medicationList = action.payload;
       },
+      addDoB: (state, action) => {
+        state.DoB = action.payload;
+      },
+      addGender: (state, action) => {
+        state.gender = action.payload;
+      },
+      addLastProfileUpdate: (state, action) => {
+        state.lastProfileUpdate = action.payload;
+      },
     },
   })
 

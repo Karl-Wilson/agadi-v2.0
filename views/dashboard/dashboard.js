@@ -3,7 +3,7 @@ import {PageWrapper, Modal} from '../../components/core/core'
 import {Sidebar, DashNav, DisplayWindow} from '../../components/layouts/layouts'
 import { useSelector } from "react-redux";
 import  {PageLoading} from '../../components/core/loading/loading'
-import {UpdateModal, DosageUpdateModal} from '../../components/containers/containers'
+import {UpdateModal, DosageUpdateModal, SignoutModal} from '../../components/containers/containers'
 import styled from "styled-components";
 const MainPage = styled.div`
     display: flex;
@@ -21,10 +21,15 @@ const MainPage = styled.div`
         padding: 0px 50px;
     }
 `
+const PageLoading2 = styled(PageLoading)`
+    width: calc(100% - 300px);
+    left: 300px;
+`
 const Dashboard = props =>{
     const isLoading = useSelector(state=>state.ui.loading)
     const showModal = useSelector(state=>state.ui.updateModal)
     const showDosageUpdateModal = useSelector(state=>state.ui.showDosageUpdateModal)
+    const showSignupModal = useSelector(state=>state.ui.showSignupModal)
     const component = useDashboardRouter();
     if(component){
         return component
@@ -34,10 +39,11 @@ const Dashboard = props =>{
             <Sidebar/>
             <MainPage id="mainPage">
                 <DashNav/>
-                {isLoading && <PageLoading/>}
+                {isLoading && <PageLoading2/>}
                 <DisplayWindow/>
                 {showModal && <Modal><UpdateModal/></Modal>}
                 {showDosageUpdateModal && <Modal><DosageUpdateModal/></Modal>}
+                {showSignupModal && <Modal><SignoutModal/></Modal>}
             </MainPage>
         </PageWrapper>
     )

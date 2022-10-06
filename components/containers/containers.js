@@ -16,7 +16,8 @@ import {CardContainer} from "./cardContainer";
 import MedicationContainer from "./medicationContainer";
 import UpdateModal from "./updateModal";
 import DosageUpdateModal from "./dosageUpdateModal";
+import SignoutModal from "./signoutModal";
 export {FormButtonContainer, FormGroup, FormInputContainer, FormTitleContainer, HeroareaContent, HeroareaImage, 
         InputGroup, PageContainer, HeightInputContainer, WeightInputContainer, BPInputContainer, DrugEntry, 
         SearchBar, IndicatorContainer, CardHolder, ContentContainer, CardContainer, MedicationContainer, UpdateModal,
-        DosageUpdateModal}
+        DosageUpdateModal, SignoutModal}

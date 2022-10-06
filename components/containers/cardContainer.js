@@ -3,7 +3,8 @@ import styled from "styled-components"
 
 export const Title = styled.p`
 font-family: Gilroy-Bold;
-font-size: 18px;
+font-size: ${props=>props.titleSize || "18px"};
+color: ${props=>props.titleColor || ''};
 `
 
 export const Header = styled.div`

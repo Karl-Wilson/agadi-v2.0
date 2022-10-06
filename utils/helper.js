@@ -34,7 +34,6 @@ export const yearGenerator = () =>{
     for(let i=0;i<=50;i++){
         result.push(endYear-i)
     }
-    console.log('fired')
     return result;
 }
 

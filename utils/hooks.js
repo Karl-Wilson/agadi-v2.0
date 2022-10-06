@@ -186,7 +186,7 @@ export const useProfileUpdateFields = () =>{
 
     const data = (medication) => {
         const data = {
-        userEmail: session.email,
+        userId: session.id,
         DoB: DoB,
         gender: gender,
         height: height,

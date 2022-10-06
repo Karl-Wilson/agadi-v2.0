@@ -1,14 +1,57 @@
-import {collection, query, where, getDocs, addDoc, doc, serverTimestamp, updateDoc } from 'firebase/firestore'
+import {collection, query, where, getDocs, addDoc, doc, serverTimestamp, updateDoc, getDoc } from 'firebase/firestore'
 import db from './config';
 export const loginBuilder = async (email, password) =>{
-    let user;
+    let userInfo, userid;
     const q = query(collection(db, "user"), where("email", "==", email), where('password', "==", password));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-       user = doc.data()
+       //userInfo = doc.data()
+       userid = doc.id
     });
-    return user;
+    return  userid;
 }
+export const getBasicUserInfo = async (userid)=>{
+    //baic info is firstname, lastname, email
+    let info;
+    const docRef = doc(db, "user", userid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        info = docSnap.data();
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+    let {firstname, lastname, email} = info;
+    let fullname = firstname+' '+lastname;
+    info = {name: fullname, email: email};
+    return info;
+}
+
+export const profileUpdateChecker = async(userid) =>{
+    let found;
+    const docRef = doc(db, "user", userid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        found = docSnap.data();
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+    let {profileUpdate} = found
+    return profileUpdate;
+
+    // let found;
+    // const q = query(collection(db, 'user'), where('email', '==', email));
+    // const querySnapshot = await getDocs(q);
+    // querySnapshot.forEach((doc) => {
+    //     found = doc.data()
+    // });
+    // let {profileUpdate} = found
+    // return profileUpdate;
+}
+
 export const checkEmail = async (email) =>{
     let found;
     const q = query(collection(db, 'user'), where('email', '==', email));
@@ -31,37 +74,9 @@ export const createUser = async (firstname, lastname, email, password) =>{
     return {id: docRef.id};
 }
 
-export const profileUpdateChecker = async(email) =>{
-    let found;
-    const q = query(collection(db, 'user'), where('email', '==', email));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-        found = doc.data()
-    });
-    let {profileUpdate} = found
-    return profileUpdate;
-}
-// export const profileUpdateUpdater = async(email) =>{
-//     let found;
-//     const q = query(collection(db, 'user'), where('email', '==', email));
-//     const querySnapshot = await getDocs(q);
-//     querySnapshot.forEach((doc) => {
-//         found = doc.data()
-//     });
-//     let {profileUpdate} = found
-//     return profileUpdate;
-// }
-
-
-export const profileUpdateUpdater = async(email, data) =>{
-    let found;
-    const q = query(collection(db, 'user'), where('email', '==', email));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-        found = doc.id
-    });
-    try{
-        const profileRef = doc(db, "user", found);
+export const profileUpdateUpdater = async(userid, data) =>{
+      try{
+        const profileRef = doc(db, "user", userid);
         updateDoc(profileRef, {
             ...data, 
             profileUpdate: true,
@@ -72,20 +87,21 @@ export const profileUpdateUpdater = async(email, data) =>{
         return "Unable to Update"
     }
 }
-export const addVitalChecks = async (email, reading, documentName) =>{
+
+export const addVitalChecks = async (userid, reading, documentName) =>{
     // Add a new document with a generated id.
     const docRef = await addDoc(collection(db, documentName), {
-        email: email,
+        userId: userid,
         reading: reading,
         date: serverTimestamp()
     });
     return docRef.id;
 }
-export const updateDrugTaken = async (drugName, taken, email) =>{
+export const updateDrugTaken = async (drugName, taken, userid) =>{
     // Add a new document with a generated id.
     let result = []
     let indexes = []
-    const q = query(collection(db, 'Medications'), where("email", "==", email));
+    const q = query(collection(db, 'Medications'), where("userId", "==", userid));
     const querySnapshot = await getDocs(q);
     
     querySnapshot.forEach((doc) => {
@@ -110,21 +126,37 @@ export const updateDrugTaken = async (drugName, taken, email) =>{
     
 }
 
-export const getUserVitals = async (email, vitals) =>{
+export const getUserVitals = async (userid, vitals) =>{
     let latest = [];
-    const q = query(collection(db, vitals), where("email", "==", email));
+    const q = query(collection(db, vitals), where("userId", "==", userid));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
        latest.push(doc.data())
     });
     return latest;
 }
-export const getUserInfo = async (email) =>{
+export const getUserInfo = async (userid) =>{
     let user;
-    const q = query(collection(db, 'user'), where("email", "==", email));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-       user = doc.data()
-    });
+    const docRef = doc(db, "user", userid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        user = docSnap.data();
+        let {firstname, lastname, email, DoB, gender, height, unitMethod, updated, weight} = user;
+        let name = firstname+ ' '+lastname
+        let basicUserInfo = {name: name, email: email, id: userid}
+        user = {DoB: DoB, gender: gender, height: height, unitMethod: unitMethod, updated: updated, weight: weight, user: basicUserInfo}
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
     return user;
+}
+export const updateUserInfo = async (data) =>{
+    let {userId, ...updateData} = data;
+    let userid;
+    await updateDoc(doc(db, "user", userId), {
+     ...updateData,
+     updated: serverTimestamp(),
+    })
 }

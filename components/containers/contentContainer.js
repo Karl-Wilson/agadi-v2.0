@@ -2,7 +2,10 @@ import { PageLoading } from '../core/loading/loading'
 import { useDisplayWindowRouter } from '../../router/router';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import {fetchVitalsThunk} from '../../utils/thunks'
+import {fetchVitalsThunk} from '../../utils/thunks';
+import { useRouter } from 'next/router';
+import {userUrlBuilder} from '../../utils/helper'
+
 
 let firstLoad = true
 const ContentContainer = props =>{
@@ -14,10 +17,10 @@ const ContentContainer = props =>{
     useEffect(() => {
         if(user && firstLoad){
             firstLoad = false
-            fetchVitalsThunk({email: user.email}, dispatch)
+            fetchVitalsThunk({userId: user.id}, dispatch)
         }   
         if(isUpdated){
-            fetchVitalsThunk({email: user.email}, dispatch)
+            fetchVitalsThunk({userId: user.id}, dispatch)
         }
     }, [user, isUpdated])
 

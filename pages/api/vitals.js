@@ -1,14 +1,13 @@
 import {getUserVitals, getUserInfo, addVitalChecks, updateDrugTaken} from '../../firebase/builder'
 const handler = async(req, res) =>{
     if(req.method == 'POST'){
-        const {email} = req.body
+        const {userId} = req.body
         try{
-            let bloodPressure = await getUserVitals(email, 'BloodPressure')
-            let sugarLevel = await getUserVitals(email, 'SugarLevel')
-            let medications = await getUserVitals(email, 'Medications')
-            let userInfo = await getUserInfo(email)
-            let {height, weight, unitMethod} = userInfo
-            res.status(200).json({data: {bloodPressure: bloodPressure, sugarLevel: sugarLevel, height: height, weight: weight, unitMethod: unitMethod, medications: medications}})
+            let bloodPressure = await getUserVitals(userId, 'BloodPressure')
+            let sugarLevel = await getUserVitals(userId, 'SugarLevel')
+            let medications = await getUserVitals(userId, 'Medications')
+            let userInfo = await getUserInfo(userId)
+            res.status(200).json({data: {bloodPressure: bloodPressure, sugarLevel: sugarLevel, medications: medications, userInfo: userInfo}})
         }catch(e){
             res.status(400).json({error: e.message})
         }
@@ -16,17 +15,17 @@ const handler = async(req, res) =>{
     
     if(req.method == 'PUT'){
         if(req.body.alreadyTakenUpdate){
-            const {drugName, taken, email} = req.body
+            const {drugName, taken, userId} = req.body
             try{
-                await updateDrugTaken(drugName, taken, email)
+                await updateDrugTaken(drugName, taken, userId)
                 res.status(200).json({data: 'success'})
             }catch(e){
                 res.status(400).json({error: e.message})
             }  
         }else{
-            const {reading, email, document} = req.body
+            const {reading, userId, document} = req.body
             try{
-                let result = await addVitalChecks(email, reading, document)
+                let result = await addVitalChecks(userId, reading, document)
                 res.status(200).json({data: 'success'})
             }catch(e){
                 res.status(400).json({error: e.message})

@@ -12,11 +12,15 @@ import { userUrlBuilder } from "../utils/helper";
 import { useEffect } from "react";
 import {PageLoading} from '../components/core/loading/loading'
 import { dashboardPageCheck } from "../utils/helper";
+import { useDispatch } from "react-redux";
+import { uiAction } from "../store/reducers/uiReducer";
 //any component with router must return <Loading/> component as default
 //to get reroute without displaying the current url components, decalre a variable outside the component to help track first time load
 
 export const useDashboardRouter = () =>{
     const router = useRouter()
+    const dispatch = useDispatch();
+    const {addLoading} = uiAction
     const user = useSelector(state=>state.ui.user)
     const userUrl = user? userUrlBuilder(user.name): false
     const isProfileUpdated = useSelector(state=>state.ui.profileUpdate)
@@ -27,6 +31,7 @@ export const useDashboardRouter = () =>{
     useEffect(() => {
         if(isProfileUpdated){
             //if loading, stop loading
+            //dispatch(addLoading(false));
         }
         if(!isProfileUpdated && userUrl){
             router.replace(`/${userUrl}/profile-update`)

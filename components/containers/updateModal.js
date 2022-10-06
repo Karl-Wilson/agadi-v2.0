@@ -126,7 +126,7 @@ const BPForm = props =>{
     const clickHandler = () =>{
         let isValid = readingValidation(bloodPressure)
         if(isValid){
-            let data = {reading: bloodPressure, email: user.email, document: 'BloodPressure'}
+            let data = {reading: bloodPressure, userId: user.id, document: 'BloodPressure'}
             UpdateVitalsThunk(data, dispatch, closeModalHandler)
         }  
     }
@@ -151,7 +151,7 @@ const SugarForm = props =>{
     const clickHandler = () =>{
         let isValid = readingValidation(sugarLevel)
         if(isValid){
-            let data = {reading: sugarLevel, email: user.email, document: 'SugarLevel'}
+            let data = {reading: sugarLevel, userId: user.id, document: 'SugarLevel'}
             UpdateVitalsThunk(data, dispatch, closeModalHandler)
         } 
     }
@@ -175,7 +175,7 @@ const MedForm = props =>{
     const clickHandler = () =>{
         let result = formValidator(fieldValues)
         if(result.length<=0){
-           let data = {reading: fieldValues, email: user.email, document: 'Medications'}
+           let data = {reading: fieldValues, userId: user.id, document: 'Medications'}
            UpdateVitalsThunk(data, dispatch, closeModalHandler)
         }else{
             errorDisplay(result)

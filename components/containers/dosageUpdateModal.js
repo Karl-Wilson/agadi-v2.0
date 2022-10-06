@@ -97,7 +97,7 @@ const DosageUpdateModal = props =>{
     }
 
     const clickHandler = () =>{
-        let data = {drugName: drugName, taken: taken, email: user.email, document: 'Medications', alreadyTakenUpdate: true}
+        let data = {drugName: drugName, taken: taken, userId: user.id, document: 'Medications', alreadyTakenUpdate: true}
         UpdateMedThunk(data, dispatch, closeModalHandler)
     }
     return(

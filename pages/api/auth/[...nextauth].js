@@ -9,15 +9,15 @@ export default NextAuth({
             name: 'login-page',
             async authorize(credentials) {
                 const {email, password} = credentials      
-                let user, details;
+                let user, userId;
                 //sanitize input
                 
                 //login
-                details = await loginBuilder(email, password);
-                let fullname = details.firstname+' '+details.lastname
-                user = {name: fullname, email: details.email}
+                userId = await loginBuilder(email, password);
+                user = {name: userId};
+                
                 // If no error and we have user data, return it
-                if (user) {
+                if (userId) {
                   return user
                 }
                 // Return null if user data could not be retrieved

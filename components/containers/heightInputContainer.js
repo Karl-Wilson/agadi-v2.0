@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import {Select, Input} from '../core/form/form'
 const Wrapper = styled.div`
@@ -41,7 +41,7 @@ const CentimeterForm = props =>{
 }
 export const HeightInputContainer = props =>{
     return(
-        <Wrapper width="300px"  error={props.error} onClick={props.onClick} >
+        <Wrapper width={props.width||'300px'}  error={props.error} onClick={props.onClick} >
             <InputContainer>
             {(props.unit == "imperial") && <FeetForm feet={props.feet} inches={props.inches} change={props.change}/>}
             {(props.unit == "metric") && <CentimeterForm centimeter={props.centimeter} change={props.change}/>}

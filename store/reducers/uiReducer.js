@@ -31,6 +31,12 @@ const uiSlice = createSlice({
       },
       addShowDosageUpdateModal: (state, action) =>{
         state.showDosageUpdateModal = action.payload;
+      },
+      addShowSignupModal: (state, action) =>{
+        state.showSignupModal = action.payload;
+      },
+      addUserProfileUpdate:(state, action) =>{
+        state.userProfileUpdate = action.payload;
       }
     },
   })
