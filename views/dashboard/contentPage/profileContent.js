@@ -8,7 +8,7 @@ import { dayGenerator, yearGenerator, isInputEmpty, isInputInteger, isInputStrin
 import { updateProfilethunk } from "../../../utils/thunks";
 import { useRouter } from "next/router";
 const Form = styled.form``
-const FormGroup2 = styled(FormGroup)`
+export const FormGroup2 = styled(FormGroup)`
     margin-bottom: 40px;
     width: 100%;
     @media screen and (min-width: 992px){    
@@ -17,19 +17,19 @@ const FormGroup2 = styled(FormGroup)`
         justify-content: space-between;
     }
 `
-const Card2 = styled(Card)`
+export const Card2 = styled(Card)`
 @media screen and (min-width: 992px){
     padding: 30px 60px;
 }
 `
-const LabelWrapper = styled.div`
+export const LabelWrapper = styled.div`
     margin-bottom: 10px;
 @media screen and (min-width: 992px){
     width: 300px;
 }
 `
 
-const Input2 = styled(Input)`
+export const Input2 = styled(Input)`
 @media screen and (min-width: 992px){
   
 }
@@ -95,7 +95,6 @@ const ProfileContent = props =>{
     
     useEffect(() => {
         if(user && DoB && genderData && lastProfileUpdate && unitMethod && heightData && weightData ){
-            console.log(user)
             setFirstname(userFullnamesplitter(user.name)[0])
             setLastname(userFullnamesplitter(user.name)[1])
             setEmail(user.email)
@@ -349,7 +348,7 @@ const ProfileContent = props =>{
     return <>
         <CardHolder> 
             <Card2>
-                <CardContainer title="profile">
+                <CardContainer title="Profile" mb="24px" titleSize="24px" titleColor="#824100">
                         <Form>
                             <FormGroup2>
                                 <LabelWrapper><Label mr="40px">Firstname</Label></LabelWrapper>
