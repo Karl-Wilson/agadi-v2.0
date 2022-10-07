@@ -89,16 +89,20 @@ export const showSidebar = () =>{
 const Sidebar = props =>{
     const dispatch = useDispatch()
     const {addUpdateModal} = uiAction
+
     const updateHandler = (e) =>{
         dispatch(addUpdateModal(true))
     }
+
     useEffect(() => {
-        window.addEventListener('resize', function(){
-            let screenWidth = window.innerWidth
-            if(screenWidth>=992){
-                document.getElementById('sidebar').classList.remove('hideSidebar')
-            }
-        })
+       if(document.getElementById('sidebar')){ 
+            window.addEventListener('resize', function(){
+                let screenWidth = window.innerWidth
+                if(screenWidth>=992){
+                    document.getElementById('sidebar').classList.remove('hideSidebar')
+                }
+            })
+        }
       return () => {
         window.removeEventListener('resize', function(){
             let screenWidth = window.innerWidth
