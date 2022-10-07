@@ -40,8 +40,16 @@ const Register = props =>{
             if(isInputEmpty(input3)) setEmailError(true)
             if(isInputEmpty(input4)) setPassError(true)
             if(isInputEmpty(input5)) setConfirmError(true)
-            isValid = false
             setError('Fill in empty fields')
+            isValid = false
+        }else if(input4 && input5){
+            if(input4 != input5){
+                setPassError(true)
+                setConfirmError(true)
+                setError('Password does not match')
+                isValid = false
+            } 
+
         }
         return isValid;
     }
