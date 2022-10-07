@@ -9,12 +9,14 @@ const Wrapper = styled.div`
     margin-left: ${props=>props.Sml||''};
     margin-right: ${props=>props.Smr||''};
     margin-top: ${props=>props.Smt||''};
+    margin-bottom: ${props=>props.Smb||''};
     @media screen and (min-width: 992px) {
         width: ${props=>props.Lwidth||props.Swidth||''};
         height: ${props=>props.Lheight || props.Sheight||'auto'};
         margin-left: ${props=>props.Lml || props.Sml ||''};
         margin-right: ${props=>props.Lmr || props.Smr||''};
         margin-top: ${props=>props.Lmt || props.Smt||''};
+        margin-bottom: ${props=>props.Lmb || props.Smb||''};
     }
 `
 const Card = props =>{
