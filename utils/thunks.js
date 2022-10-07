@@ -29,8 +29,7 @@ export const profileUpdaterThunk = (data, dispatch) =>{
                 //loading
                 //redirect
                 dispatch(addProfileUpdate(true))
-                dispatch(addLoading(false))
-                console.log(data)
+                //dispatch(addLoading(false))
             }else if(data.error){
                 //display modal
                 console.log(data)

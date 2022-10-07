@@ -11,14 +11,16 @@ let firstLoad = true
 const ContentContainer = props =>{
     const user = useSelector(state=>state.ui.user)
     const isUpdated = useSelector(state=>state.ui.isUpdated)
+    const isProfileUpdated = useSelector(state=>state.ui.profileUpdate)
     const dispatch = useDispatch()
     const component = useDisplayWindowRouter();
 
     useEffect(() => {
-        if(user && firstLoad){
-            firstLoad = false
-            fetchVitalsThunk({userId: user.id}, dispatch)
-        }   
+        // if(user && isProfileUpdated){
+        //     console.log(profileUpdate)
+        //     firstLoad = false
+        //     fetchVitalsThunk({userId: user.id}, dispatch)
+        // }   
         if(isUpdated){
             fetchVitalsThunk({userId: user.id}, dispatch)
         }
