@@ -4,9 +4,11 @@ import {FormWrapper, Input, FormErrorDisplay} from "../components/core/form/form
 import {Button, Logo, PageWrapper} from '../components/core/core'
 import {FormButtonContainer, FormInputContainer, FormTitleContainer, InputGroup} from '../components/containers/containers'
 import { registerThunk } from "../utils/thunks";
-import {FormLoading} from '../components/core/loading/loading'
+import {FormLoading, PageLoading} from '../components/core/loading/loading'
 import { isInputEmpty } from "../utils/helper";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 const Wrapper = styled.div`
     width: 100%;
 `
@@ -20,6 +22,8 @@ const Img = styled.img`
     }
 `
 const Register = props =>{
+    const router = useRouter();
+    const user = useSelector(state=>state.ui.user)
     const [isLoading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const [FnameError, setFnameError] = useState(false)
@@ -88,6 +92,9 @@ const Register = props =>{
         }
         
     }
+    if(user){
+        router.reload();
+    }else{
     return(
         <PageWrapper alignItems="center">
                 <FormWrapper Lwidth="800px" dFlex="flex" justifyContent="space-between" alignItems="center">
@@ -116,5 +123,7 @@ const Register = props =>{
                 </FormWrapper>
         </PageWrapper>
     )
+    }
+    return <PageLoading/>
 }
 export default Register;

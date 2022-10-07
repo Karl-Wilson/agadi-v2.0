@@ -8,10 +8,9 @@ import DashboardContent from "../views/dashboard/contentPage/dashboardContent";
 import ProfileContent from "../views/dashboard/contentPage/profileContent";
 import SettingsContent from "../views/dashboard/contentPage/settingsContent";
 import { useSelector } from "react-redux";
-import { userUrlBuilder } from "../utils/helper";
 import { useEffect } from "react";
 import {PageLoading} from '../components/core/loading/loading'
-import { dashboardPageCheck } from "../utils/helper";
+import { dashboardPageCheck, userUrlBuilder } from "../utils/helper";
 import { useDispatch } from "react-redux";
 import { fetchVitalsThunk } from "../utils/thunks";
 //any component with router must return <Loading/> component as default

@@ -5,12 +5,17 @@ import {FormTitleContainer, FormInputContainer, FormButtonContainer} from "../co
 import {signIn} from 'next-auth/react'
 import {FormLoading, PageLoading} from '../components/core/loading/loading'
 import { useState } from "react";
-import { isInputInteger, isInputString, isInputEmpty } from "../utils/helper";
+import { isInputEmpty } from "../utils/helper";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 const InnerWrapper = styled.form`
 
 `
 
 const Login = props =>{
+    //const loginroute = useLoginRouter()
+    const router = useRouter();
+    const user = useSelector(state=>state.ui.user)
     const [isLoading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const [emailError, setEmailError] = useState(false)
@@ -52,7 +57,9 @@ const Login = props =>{
         }
         
     }
-
+    if(user){
+        router.reload();
+    }else{
         return(
         <PageWrapper alignItems="center">
             <FormWrapper Lwidth="500px">
@@ -74,6 +81,7 @@ const Login = props =>{
             </FormWrapper>
         </PageWrapper>
         )
-    
+    }
+    return <PageLoading/>
 }
 export default Login;
