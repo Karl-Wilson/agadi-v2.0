@@ -52,7 +52,7 @@ const MyChart = props => {
         },
         title: {
             display: true,
-            text: props.chartTitle,
+            text: props.title,
         },
         },
     };

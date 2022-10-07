@@ -13,7 +13,6 @@ const ChartContainer = props =>{
     useEffect(() => {
         let data = plotChart(props.data, props.name)
         setDatasets(data)
-        console.log(props.data)
     }, [props.data])
     
     const chartDisplayHandler = (e)=>{
@@ -33,7 +32,7 @@ const ChartContainer = props =>{
                     </Select>
             </Header>
             <Body title={props.name} chart>
-                <MyChart name={props.name} datasets={datasets} chartTitle={displaySelect}/>
+                <MyChart name={props.name} datasets={datasets} title={displaySelect}/>
             </Body>
         </Card>
     )
