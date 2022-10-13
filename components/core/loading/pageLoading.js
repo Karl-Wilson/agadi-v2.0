@@ -17,7 +17,7 @@ const Gif = styled.img`
     height: auto;
 `
 const PageLoading = props =>{
-    return <Wrapper {...props}>
+    return <Wrapper>
         <Gif src="/images/loader.svg"/>
     </Wrapper>
 }
