@@ -201,7 +201,9 @@ export const bmiCalculator = (height, weight, unit) =>{
 export const getMedicationLevel = (duration, dosage, taken=0) =>{
     if(!taken) return 0;
     let takenLevel = (taken * 100) / (duration * dosage)
-    return Math.floor(takenLevel);
+    takenLevel = Math.floor(takenLevel);
+    if(takenLevel > 100) takenLevel = 100;
+    return takenLevel;
 }
 export const displayMedicationList = (arr) =>{
     if(!arr) return null;

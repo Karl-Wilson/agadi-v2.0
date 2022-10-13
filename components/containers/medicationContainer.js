@@ -60,6 +60,7 @@ const EditBtn = styled.div`
 
 `
 const Drugs = props =>{
+    console.log(props.title)
     return(
         <DrugWrapper>
             <div className="med-header">
@@ -91,6 +92,7 @@ const MedicationContainer = (props) =>{
                 
                 {props.data && <Grid>
                     {props.data.map((value, index)=>{
+                        //if level is 100 dont show, meaning, if user has completed medications
                         if(value.level != 100) return <Drugs key={index+'d'+index} title={value.title} level={value.level}/>
                     }
                     )}
