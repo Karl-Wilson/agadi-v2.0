@@ -213,7 +213,8 @@ export const displayMedicationList = (arr) =>{
             let duration = parseInt(innerValue.duration)
             let dosage = parseInt(innerValue.dosage)
             let taken = innerValue.taken? parseInt(innerValue.taken) : 0
-            result.push({title: innerValue.drugName, level: getMedicationLevel(duration, dosage, taken) })
+            let level = getMedicationLevel(duration, dosage, taken)
+            if(level != 100) result.push({title: innerValue.drugName, level: level});
         }) 
     })
     return result

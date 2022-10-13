@@ -52,7 +52,9 @@ const DosageUpdateModal = props =>{
     
     
     useEffect(() => {
-      if(medList){setList(medlistProcessing())}
+        if(medList){
+            setList(medlistProcessing())
+        }
     }, [medList])
     
     const closeModalHandler = () =>{
@@ -70,8 +72,11 @@ const DosageUpdateModal = props =>{
                 } 
             })
         })
-        setTaken(result[0].taken)
-        setDrugName(result[0].name)
+        if(result.length > 0){
+            setTaken(result[0].taken)
+            setDrugName(result[0].name)
+        }
+        if(result.length <= 0) closeModalHandler();
         return result;
     }
      

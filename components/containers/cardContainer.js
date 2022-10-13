@@ -2,16 +2,17 @@ import styled from "styled-components"
 
 
 export const Title = styled.p`
-font-family: Gilroy-Bold;
-font-size: ${props=>props.titleSize || "18px"};
-color: ${props=>props.titleColor || ''};
+    font-family: Gilroy-Bold;
+    font-size: ${props=>props.titleSize || "18px"};
+    color: ${props=>props.titleColor || ''};
+    margin-right: ${props=>props.mr||''};
 `
 
 export const Header = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-margin-bottom: ${props=>props.mb||''};
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: ${props=>props.mb||''};
 ` 
 export const Body = styled.div`
 

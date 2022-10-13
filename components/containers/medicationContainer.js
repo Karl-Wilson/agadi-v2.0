@@ -79,12 +79,12 @@ const MedicationContainer = (props) =>{
     const dispatch = useDispatch()
     const {addShowDosageUpdateModal} = uiAction
     const clickHandler = () =>{
-        dispatch(addShowDosageUpdateModal(true))
+        if(props.data.length > 0) dispatch(addShowDosageUpdateModal(true))
     }
     return(
         <Card Swidth="80%" Lwidth="auto">
             <Header>
-                <Title>Medications</Title>
+                <Title mr="24px">Medications</Title>
                 <Button transparent Swidth="80px" height="25px" fontSize="14px" click={clickHandler}>Edit</Button>
             </Header>
             <Body>
@@ -93,7 +93,7 @@ const MedicationContainer = (props) =>{
                 {props.data && <Grid>
                     {props.data.map((value, index)=>{
                         //if level is 100 dont show, meaning, if user has completed medications
-                        if(value.level != 100) return <Drugs key={index+'d'+index} title={value.title} level={value.level}/>
+                        return <Drugs key={index+'d'+index} title={value.title} level={value.level}/>
                     }
                     )}
                 </Grid>}
