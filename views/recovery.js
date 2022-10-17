@@ -12,19 +12,17 @@ const InnerWrapper = styled.form`
 
 `
 
-const Login = props =>{
+const Recovery = props =>{
     //const loginroute = useLoginRouter()
     const router = useRouter();
     const user = useSelector(state=>state.ui.user)
     const [isLoading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const [emailError, setEmailError] = useState(false)
-    const [passError, setPassError] = useState(false)
-    const validate = (input, input2) =>{
+    const validate = (input) =>{
         let isValid = true
         if(isInputEmpty(input) || isInputEmpty(input2)){
             if(isInputEmpty(input)) setEmailError(true)
-            if(isInputEmpty(input2)) setPassError(true)
             isValid = false
             setError('Fill in empty fields')
         }
@@ -32,7 +30,6 @@ const Login = props =>{
     }
     const hideError = () =>{
         setEmailError(false)
-        setPassError(false)
         setError(false)
     }
 
@@ -40,8 +37,7 @@ const Login = props =>{
         e.preventDefault();
         setLoading(true)
         let email = document.querySelector('input[name="email"]').value
-        let password = document.querySelector('input[name="password"]').value
-        let isValid = validate(email, password)
+        let isValid = validate(email)
         if(isValid){
             let result = await signIn('login', {redirect: false, email: email, password: password})
             if(result.ok){
@@ -49,9 +45,8 @@ const Login = props =>{
                 location.reload()
             }else{
                 setLoading(false)
-                setError('Username or Password is not correct')
+                setError('Email is not correct')
             }
-            console.log(result)
         }else{
             setLoading(false)
         }
@@ -66,16 +61,13 @@ const Login = props =>{
                 {isLoading && <FormLoading/>}
                 <InnerWrapper>
                     <Logo/>
-                    <FormTitleContainer title="Login" subtitle="to continue to dashboard"/>
+                    <FormTitleContainer title="Recover your password" subtitle="Enter your email to recover password"/>
                     {error && <FormErrorDisplay mt="0px" mb="30px">{error}</FormErrorDisplay>}
                     <FormInputContainer>
                         <Input type="text" placeholder="Email" name="email" Smb="10px" error={emailError} onClick={hideError}/>
-                        <Input type="password" placeholder="Password" name="password" Smb="10px" error={passError} onClick={hideError}/>
                     </FormInputContainer>
-                    <Button bold SjustifyContent="flex-start" Swidth="180px" pl="0px" pr="0px" href="/recovery">Forgot Passowrd?</Button>
                     <FormButtonContainer>
-                        <Button bold pl="0px" pr="0px" LjustifyContent="flex-start" Lwidth="90px" Swidth="100%" href="/register">Register</Button>
-                        <Button solid Swidth="100%" Lwidth="160px" click={submitHandler}>Login</Button>
+                        <Button solid Swidth="100%" Lwidth="160px">Recover</Button>
                     </FormButtonContainer>
                 </InnerWrapper>
             </FormWrapper>
@@ -84,4 +76,4 @@ const Login = props =>{
     }
     return <PageLoading/>
 }
-export default Login;
+export default Recovery;

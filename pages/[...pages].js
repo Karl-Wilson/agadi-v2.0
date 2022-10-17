@@ -1,4 +1,4 @@
-import {Homepage, Login, Register, Dashboard, Aboutpage} from "../views/viewIndex"
+import {Homepage, Login, Register, Dashboard, Aboutpage, Recovery} from "../views/viewIndex"
 import { useRouter } from 'next/router';
 import {getSession} from 'next-auth/react'
 import { useDispatch } from "react-redux";
@@ -20,7 +20,7 @@ const PageRouter = props =>{
     const userProfileUpdate = useSelector(state=>state.ui.userProfileUpdate)
     
     useEffect(() => {        
-        if(!props.session && path.pages[0] != "index" && path.pages[0] != "home" && path.pages[0] != "register" && path.pages[0] != "login" && path.pages[0] != "about"){
+        if(!props.session && path.pages[0] != "index" && path.pages[0] != "home" && path.pages[0] != "register" && path.pages[0] != "login" && path.pages[0] != "about" && path.pages[0] != "recovery"){
             router.replace("/login");
         }
         if(!userDataFromRedux){
@@ -46,6 +46,8 @@ const PageRouter = props =>{
             case "register": return <Register/>;
             break;
             case "login": return <Login/>; 
+            break;
+            case "recovery": return <Recovery/>; 
             break;
             case "about": return <Aboutpage/>; 
             break;
