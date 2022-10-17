@@ -8,7 +8,7 @@ const Wrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 30px 0px;
-    height: 100%;
+    
     @media screen and (min-width: 764px){
         height: auto;
         flex-direction: row;

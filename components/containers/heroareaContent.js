@@ -7,6 +7,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     align-items: flex-start;
     order: 2;
+    margin-top: 100px;
     @media screen and (min-width: 768px){
         width: 400px;
         order: 1;
@@ -15,17 +16,25 @@ const Wrapper = styled.div`
         width: 500px;
     }
 `
-const Title = styled.p`
+export const Title = styled.p`
     font-family: Gilroy-Bold;
-    font-size: 54px;
+    font-size: 42px;
     margin-bottom: 24px;
-    line-height: 54px;
+    line-height: 42px;
+    @media screen and (min-width: 768px){
+        font-size: 54px;
+        line-height: 54px;
+    }
 `
 
-const Subtitle = styled.p`
+export const Subtitle = styled.p`
     margin-bottom: 48px;
-    font-size: 20px;
-    line-height: 27px;
+    font-size: 16px;
+    line-height: 23px;
+    @media screen and (min-width: 768px){
+        font-size: 20px;
+        line-height: 27px;
+    }
 `
 const HeroareaContent = props =>{
     const router = useRouter();
