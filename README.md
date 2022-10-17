@@ -49,5 +49,5 @@ Features to be added:
 ## Contact
 Created by Okose Chidelu Karl
 - Email: okosechidelu@gmail.com
-- Instagram: (@developerkarl)[instagram.com/developerkarl]
+- Instagram: [@developerkarl](instagram.com/developerkarl)
 
