@@ -21,7 +21,8 @@ const UpdaterThree = props =>{
     const dispatch = useDispatch();
     const backBtnHandler = useBackBtn(props.userUrl, 2)
     
-    const clickHandler = () =>{
+    const clickHandler = (e) =>{
+        e.preventDefault();
         setLoading(true)
         let isValid = readingValidation(sugarLevel)
         if(isValid){

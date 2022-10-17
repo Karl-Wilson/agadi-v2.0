@@ -28,7 +28,8 @@ const UpdaterTwo = props =>{
     const backBtnHandler = useBackBtn(props.userUrl, 1)
     const [isLoading, setLoading, bloodPressure, error, setError, readingValidation, errorHide, changeHandler, addBloodPressure] = useUpdaterTwo()
     
-    const clickHandler = () =>{
+    const clickHandler = (e) =>{
+        e.preventDefault();
         setLoading(true)
         //const bloodPressure = document.querySelector('input[name="bp"]').value
         let isValid = readingValidation(bloodPressure)
