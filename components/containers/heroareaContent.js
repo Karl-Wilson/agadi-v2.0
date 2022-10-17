@@ -34,7 +34,7 @@ const HeroareaContent = props =>{
     }
     return(
         <Wrapper>
-            <Title>Keep your Elderly Ones Healthy</Title>
+            <Title>Health Tracker For The Elderly</Title>
             <Subtitle>This app helps you take care of the aged easily by keeping track of their blood pressure,
                         Sugar level and their medications.</Subtitle>
             <Button solid click={clickHandler}>Learn more</Button>
