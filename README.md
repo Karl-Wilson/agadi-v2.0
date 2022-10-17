@@ -1,34 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+#Agadi Web App
+>This app helps you take care of the elderly ones easily by keeping track of their blood pressure, sugar level and >their medications.
+>Live url - 
 
-## Getting Started
+###General Information
+In West Africa, elderly home care is uncommon, so we end up taking care of our elderly ones in our homes. Some of them are suffering from dementia and some of them are too weak to take care of themselves. On the other hand, most of us are busy with work or business or taking up one responsibility or the other. With so many things on our mind, we tend to forget about the elderly ones at home. Sometimes we forget what medication they are on, how many times they have taken their medication and sometimes we forget to monitor their blood pressure and sugar level. When we loose track of all these things we put our elderly ones in danger. We need to keep track of all these things for better treatment or well being of the elderly ones. The question is, how do we best manage and track the health of our elderly ones?
 
-First, run the development server:
+Agadi app is built specifically to help us take care of our elderly ones. It helps keep track of things like blood pressure, sugar level and the medications of the elderly ones thereby eliminating the potential danger faced by the elderly ones. It shows us when last their blood pressure, sugar level and medication was taken. it also reminds us when to give our elderly ones their medication. It also shows us the summary of their blood pressure and sugar level over time thereby helping us see how good or bad their condition is in a given period of time. Agadi app helps in better treatment and in total well being of our elderly ones by keeping track of their medication, blood pressure and sugar level. 
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+###Technologies Used
+-HTML
+-CSS
+-Javascript
+-React.js
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+###Dependencies
+-Firebase
+-Chart2.js
+-Redux
+-Redux toolkit
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+###Features
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+###Screenshot
 
-## Learn More
+###Room for Improvement
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
