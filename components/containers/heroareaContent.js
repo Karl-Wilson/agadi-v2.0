@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {Button} from "../core/core"
+import { useRouter } from "next/router";
 const Wrapper = styled.div`
     width: 100%;
     display: flex;
@@ -16,19 +17,27 @@ const Wrapper = styled.div`
 `
 const Title = styled.p`
     font-family: Gilroy-Bold;
-    font-size: 48px;
+    font-size: 54px;
     margin-bottom: 24px;
+    line-height: 54px;
 `
 
 const Subtitle = styled.p`
-    margin-bottom: 24px;
+    margin-bottom: 48px;
+    font-size: 20px;
+    line-height: 27px;
 `
 const HeroareaContent = props =>{
+    const router = useRouter();
+    const clickHandler = () =>{
+        router.push("/about");
+    }
     return(
         <Wrapper>
-            <Title>Keep up with Health of the Elderly</Title>
-            <Subtitle>Take good care of the elderly by keeping track of their health</Subtitle>
-            <Button solid>Learn more</Button>
+            <Title>Keep your Elderly Ones Healthy</Title>
+            <Subtitle>This app helps you take care of the aged easily by keeping track of their blood pressure,
+                        Sugar level and their medications.</Subtitle>
+            <Button solid click={clickHandler}>Learn more</Button>
         </Wrapper>
     )
 }

@@ -12,7 +12,7 @@ export const loginBuilder = async (email, password) =>{
 }
 export const getBasicUserInfo = async (userid)=>{
     //baic info is firstname, lastname, email
-    let info;
+    let info = null;
     const docRef = doc(db, "user", userid);
     const docSnap = await getDoc(docRef);
 
@@ -22,14 +22,17 @@ export const getBasicUserInfo = async (userid)=>{
         // doc.data() will be undefined in this case
         console.log("No such document!");
     }
-    let {firstname, lastname, email} = info;
-    let fullname = firstname+' '+lastname;
-    info = {name: fullname, email: email};
+    if(info){
+         let {firstname, lastname, email} = info;
+        let fullname = firstname+' '+lastname;
+        info = {name: fullname, email: email};
+    }
+   
     return info;
 }
 
 export const profileUpdateChecker = async(userid) =>{
-    let found;
+    let found = null;
     const docRef = doc(db, "user", userid);
     const docSnap = await getDoc(docRef);
 
@@ -39,8 +42,14 @@ export const profileUpdateChecker = async(userid) =>{
         // doc.data() will be undefined in this case
         console.log("No such document!");
     }
-    let {profileUpdate} = found
-    return profileUpdate;
+    if(found){
+        let {profileUpdate} = found
+        return profileUpdate;
+    }
+
+    return null;
+    
+    
 
     // let found;
     // const q = query(collection(db, 'user'), where('email', '==', email));

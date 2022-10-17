@@ -1,4 +1,4 @@
-import {Homepage, Login, Register, Dashboard} from "../views/viewIndex"
+import {Homepage, Login, Register, Dashboard, Aboutpage} from "../views/viewIndex"
 import { useRouter } from 'next/router';
 import {getSession} from 'next-auth/react'
 import { useDispatch } from "react-redux";
@@ -43,6 +43,8 @@ const PageRouter = props =>{
             case "register": return <Register/>;
             break;
             case "login": return <Login/>; 
+            break;
+            case "about": return <Aboutpage/>; 
             break;
             case user: return <Dashboard/>;
             break;
