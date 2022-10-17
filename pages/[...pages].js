@@ -19,7 +19,10 @@ const PageRouter = props =>{
     const userDataFromRedux = useSelector(state=>state.ui.user)
     const userProfileUpdate = useSelector(state=>state.ui.userProfileUpdate)
     
-    useEffect(() => {
+    useEffect(() => {        
+        if(!props.session && path.pages[0] != "index" && path.pages[0] != "home" && path.pages[0] != "register" && path.pages[0] != "login" && path.pages[0] != "about"){
+            router.replace("/login");
+        }
         if(!userDataFromRedux){
             setUser(userUrlBuilder(props.session.name))
             dispatch(addUser(props.session))    
