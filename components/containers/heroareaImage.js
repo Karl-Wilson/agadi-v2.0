@@ -23,6 +23,7 @@ const ImgContainer = styled.div`
     background-image: url('/images/old-lady.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     @media screen and (min-width: 992px){
         width: 400px;
         height: 400px;
