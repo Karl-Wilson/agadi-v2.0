@@ -21,7 +21,7 @@ const DashboardContent = props =>{
     const [slTime, setSLtime] = useState()
     const [slIndicator, setSLindicator] = useState()
     const [BMI, setBMI] = useState()
-
+    console.log(medicaitonList)
     const unitMethodSelector = (height, weight, unitMethod) =>{
         let newHeight, newWeight;
         if(unitMethod == 'imperial'){

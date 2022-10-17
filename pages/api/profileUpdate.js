@@ -9,7 +9,7 @@ const handler = async (req, res) =>{
             let isProfileUpdated = await profileUpdateUpdater(userId, updateData)
             let isBloodPressureAdded = await addVitalChecks(userId, bloodPressure, 'BloodPressure')
             let isSugarLevelAdded = await addVitalChecks(userId, sugarLevel, 'SugarLevel')
-            let isMedicationAdded = await addVitalChecks(userId, medication, 'Medications')
+            let isMedicationAdded = medication.length > 0? await addVitalChecks(userId, medication, 'Medications') : true; 
             if(isProfileUpdated && isBloodPressureAdded && isSugarLevelAdded && isMedicationAdded){
                 res.status(200).json({data: 'Updated'})
             }else{

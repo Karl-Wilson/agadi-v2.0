@@ -185,6 +185,15 @@ export const useProfileUpdateFields = () =>{
     const weight = (unitMethod == 'imperial')? {pounds: pounds} : {kg: kg};
 
     const data = (medication) => {
+        let isEmpty = false;
+        medication.map(value=>{
+            if(value.drugName == '' && value.duration == '' && value.dosage == ''){
+                isEmpty = true;
+            }else{
+                isEmpty = false;
+            }
+        })
+
         const data = {
         userId: session.id,
         DoB: DoB,
@@ -194,7 +203,7 @@ export const useProfileUpdateFields = () =>{
         bloodPressure: bloodPressure,
         sugarLevel: sugarLevel,
         unitMethod: unitMethod,
-        medication: medication
+        medication: !isEmpty? medication : []
     }
     return data;
     }
@@ -310,9 +319,15 @@ export const useUpdateFour = () =>{
             }
         })
     }
-    const formValidator  = (fieldValues) =>{
+    const formValidator  = (fieldValues, profileSettings=true) =>{
         let error = []
         fieldValues.map(valueArray=>{
+            if(profileSettings){
+                if(isInputEmpty(valueArray.drugName) && isInputEmpty(valueArray.dosage) && isInputEmpty(valueArray.duration)){
+                    return error;
+                }
+            }
+
             if(isInputEmpty(valueArray.drugName)){
                 error.push({name: 'drugName', serial: valueArray.serial})
             }else if(!isInputString(valueArray.drugName)){

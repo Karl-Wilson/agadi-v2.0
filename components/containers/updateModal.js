@@ -173,7 +173,7 @@ const MedForm = props =>{
     const [closeModalHandler, dispatch] = useCloseModal()
     const user = useSelector(state=>state.ui.user)  
     const clickHandler = () =>{
-        let result = formValidator(fieldValues)
+        let result = formValidator(fieldValues, false)
         if(result.length<=0){
            let data = {reading: fieldValues, userId: user.id, document: 'Medications'}
            UpdateVitalsThunk(data, dispatch, closeModalHandler)
