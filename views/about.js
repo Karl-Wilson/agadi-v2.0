@@ -28,16 +28,16 @@ const Aboutpage = props =>{
                     how many times they have taken their medication and sometimes we forget to monitor their 
                     blood pressure and sugar level. When we loose track of all these things we put our elderly 
                     ones in danger. We need to keep track of all these things for better treatment or well being 
-                    of the elderly ones. The question, how to do best manage and track the overall well being of 
+                    of the elderly ones. The question is, how do we best manage and track the health of 
                     our elderly ones?</Text>
                 <Text>Agadi app is built specifically to help us take care of our elderly ones. It helps keep 
                     track of things like blood pressure, sugar level and the medications of the elderly ones 
                     thereby eliminating the potential danger faced by the elderly ones. It shows us when last 
-                    their blood pressure, sugar level and medication was taken. it also reminds us when to take 
+                    their blood pressure, sugar level and medication was taken. it also reminds us when to
                     give our  elderly ones their medication. It also shows us the summary of their blood pressure 
-                    and sugar level over time thereby helping see how good or bad their condition is. Agadi app 
-                    helps in better treatment and in total well being of our elderly ones by keeping track of 
-                    their medication, blood pressure and sugar level. </Text>
+                    and sugar level over time thereby helping us see how good or bad their condition is in a given period
+                    of time. Agadi app helps in better treatment and in total well being of our elderly ones by keeping 
+                    track of their medication, blood pressure and sugar level. </Text>
             </Body>
         </PageContainer>
     )
