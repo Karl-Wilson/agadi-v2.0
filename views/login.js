@@ -5,7 +5,7 @@ import {FormTitleContainer, FormInputContainer, FormButtonContainer} from "../co
 import {signIn} from 'next-auth/react'
 import {FormLoading, PageLoading} from '../components/core/loading/loading'
 import { useState } from "react";
-import { isInputEmpty } from "../utils/helper";
+import { isInputEmpty, isEmailValid } from "../utils/helper";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 const InnerWrapper = styled.form`
@@ -27,6 +27,11 @@ const Login = props =>{
             if(isInputEmpty(input2)) setPassError(true)
             isValid = false
             setError('Fill in empty fields')
+        }
+        if(!isEmailValid(input)) {
+            isValid = false;
+            setEmailError(true)
+            setError('Not a valid email');
         }
         return isValid;
     }
@@ -51,7 +56,6 @@ const Login = props =>{
                 setLoading(false)
                 setError('Username or Password is not correct')
             }
-            console.log(result)
         }else{
             setLoading(false)
         }
@@ -72,7 +76,7 @@ const Login = props =>{
                         <Input type="text" placeholder="Email" name="email" Smb="10px" error={emailError} onClick={hideError}/>
                         <Input type="password" placeholder="Password" name="password" Smb="10px" error={passError} onClick={hideError}/>
                     </FormInputContainer>
-                    <Button bold SjustifyContent="flex-start" Swidth="180px" pl="0px" pr="0px" href="/recovery">Forgot Passowrd?</Button>
+                    <Button bold SjustifyContent="flex-start" Swidth="180px" pl="0px" pr="0px" href="/recovery">Forgot Password?</Button>
                     <FormButtonContainer>
                         <Button bold pl="0px" pr="0px" LjustifyContent="flex-start" Lwidth="90px" Swidth="100%" href="/register">Register</Button>
                         <Button solid Swidth="100%" Lwidth="160px" click={submitHandler}>Login</Button>

@@ -5,7 +5,7 @@ import {Button, Logo, PageWrapper} from '../components/core/core'
 import {FormButtonContainer, FormInputContainer, FormTitleContainer, InputGroup} from '../components/containers/containers'
 import { registerThunk } from "../utils/thunks";
 import {FormLoading, PageLoading} from '../components/core/loading/loading'
-import { isInputEmpty } from "../utils/helper";
+import { isInputEmpty, isEmailValid } from "../utils/helper";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
@@ -50,6 +50,11 @@ const Register = props =>{
                 isValid = false
             } 
 
+        }
+        if(!isEmailValid(input)) {
+            isValid = false;
+            setEmailError(true)
+            setError('Not a valid email');
         }
         return isValid;
     }

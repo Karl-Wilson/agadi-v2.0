@@ -224,3 +224,10 @@ export const clearUpdateModalForm = (dispatch) =>{
     dispatch(addBloodPressure(''))
     dispatch(addSugarLevel(''))
 }
+export const isEmailValid = (email) =>{
+    let data = email.split("@");
+    if(data.length == 2){
+        return true;
+    }
+    return false;
+}
