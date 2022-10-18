@@ -34,7 +34,7 @@ Agadi app is built specifically to help us take care of our elderly ones. It hel
 - Profile update
 
 ## Screenshot
-![](./public/images/agadi-home1.png)
+![](./public/images/agadi.png)
 
 ## Usage
 Test Login Details:
