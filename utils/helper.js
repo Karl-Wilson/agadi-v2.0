@@ -226,8 +226,11 @@ export const clearUpdateModalForm = (dispatch) =>{
 }
 export const isEmailValid = (email) =>{
     let data = email.split("@");
-    if(data.length == 2){
-        return true;
+    if(data.length == 2 && data[0] && data[1]){
+        let dotcheck = data[1].split(".");
+        if(dotcheck.length == 2 && dotcheck[0] && dotcheck[1]){
+            return true;
+        }  
     }
     return false;
 }

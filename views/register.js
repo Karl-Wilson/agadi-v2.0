@@ -51,7 +51,7 @@ const Register = props =>{
             } 
 
         }
-        if(!isEmailValid(input)) {
+        if(!isEmailValid(input3)) {
             isValid = false;
             setEmailError(true)
             setError('Not a valid email');
