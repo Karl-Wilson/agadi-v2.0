@@ -68,10 +68,11 @@ const Bottomline = styled.div`
     bottom: 0px;
     right: 0px;
     width: 400px;
-    height: 400px;
+    height: 300px;
     border-bottom: 1px solid #cccccc;
     @media screen and (min-width: 992px){
         width: 500px;
+        height: 400px;
     }
 `
 const DottedMemphis = styled.img`
