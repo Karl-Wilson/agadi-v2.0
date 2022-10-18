@@ -82,7 +82,7 @@ const MedicationContainer = (props) =>{
         if(props.data.length > 0) dispatch(addShowDosageUpdateModal(true))
     }
     return(
-        <Card Swidth="80%" Lwidth="auto">
+        <Card Swidth="90%" Lwidth="auto">
             <Header>
                 <Title mr="24px">Medications</Title>
                 <Button transparent Swidth="80px" height="25px" fontSize="14px" click={clickHandler}>Edit</Button>

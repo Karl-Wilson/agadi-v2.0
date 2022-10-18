@@ -22,7 +22,7 @@ const ChartContainer = props =>{
     }
 
     return(
-        <Card Swidth="80%" Lwidth="50%" Lmr={props.mr} Smt={props.mt}>
+        <Card Swidth="90%" Lwidth="50%" Lmr={props.mr} Smt={props.mt}>
             <Header>
                 <Title>{props.name}</Title>
                     <Select height="30px" padding="5px" onChange={chartDisplayHandler}>
