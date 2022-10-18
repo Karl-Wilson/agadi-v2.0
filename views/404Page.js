@@ -2,6 +2,7 @@ import PageContainer from "../components/containers/pageContainer"
 import styled from "styled-components";
 import { Title, Subtitle } from "../components/containers/heroareaContent";
 import { Button, Logo } from '../components/core/core'
+import { useRouter } from "next/router";
 const Heroarea = styled.div`
     width: 100%;
     height: 100vh;
@@ -92,6 +93,10 @@ const Logo2 = styled(Logo)`
 }
 ` 
 const Page404 = props =>{
+    const router = useRouter();
+    const clickHandler = () =>{
+        router.push('/')
+    }
     return(
         <PageContainer>
             <Heroarea>
@@ -101,7 +106,7 @@ const Page404 = props =>{
                         <div id="writeupInner">
                         <Title2>OOPs...</Title2>
                         <Subtitle2>The page you are trying to reach does not exist. Go back to HomePage.</Subtitle2>
-                        <Button solid>HomePage</Button>
+                        <Button solid click={clickHandler}>HomePage</Button>
                         </div>
                     </WriteupWrapper>
                 </LeftWrapper>
