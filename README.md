@@ -13,6 +13,7 @@ Agadi app is built specifically to help us take care of our elderly ones. It hel
 - CSS
 - Javascript
 - React.js
+- Next.js
 
 ## Dependencies
 - Firebase
@@ -24,16 +25,24 @@ Agadi app is built specifically to help us take care of our elderly ones. It hel
 - Next-Auth
 
 ## Features
-- Displays Lastest Blood Pressure reading
-- Displays Lastest Sugar Levle reading
+- Displays last Blood Pressure reading
+- Displays last Sugar Level reading
 - Displays BMI
-- Weekly, monthly, yearly Blood Pressure reading summary chart
-- Weekly, monthly, yearly Sugar Level reading summary chart
-- Displays on going medication list
+- Displays on going medications
+- Weekly, monthly, yearly summary chart for Blood Pressure, Sugar level
 - Blood Pressure, Sugar level, Medications update
 - Profile update
 
 ## Screenshot
+![This is an image](/images/agadi-home1.png)
+
+## Usage
+Test Login Details:
+- Email: emekajohn@test.com
+- Password: emekatest1234
+
+## Project Status
+Project is: complete
 
 ## Room for Improvement
 Rooms for improvement:
@@ -41,13 +50,13 @@ Rooms for improvement:
 
 Features to be added:
 - Blood Pressure and Sugar Level Reading Full Analytics 
+- Settings page
 
 ## Acknowledgements
-- Many thanks to - Barr. Polycarp and Ebele Okose, Chief Paul Okose, Ifeanyi Igbokwe, Odinaka and Lotachukwu Anuniru.
-- This project was inpired by Late Marcel and Elizabeth Okose(Diabetes), Late Abel Igbokwe(Diabetes), Late Gregory Okpalagu(Dementia).
+- Many thanks to - God almighty, To my parents - Barr. Eng. Polycarp and Ebele Okose, Chief Paul Okose, Ifeanyi Igbokwe, Odinaka and Lotachukwu Anuniru.
 
 ## Contact
 Created by Okose Chidelu Karl
 - Email: okosechidelu@gmail.com
-- Instagram: [@developerkarl](instagram.com/developerkarl)
+- Instagram: [@developerkarl](www.instagram.com/developerkarl)
 
