@@ -40,14 +40,14 @@ const PageRouter = props =>{
 
     
     if(path.pages){
-           switch(path.pages[0]){
-            case "index": return <Homepage/>;
-            break;
-            case "home": return <Homepage/>;
-            break;
+           switch(path.pages[0]){            
             case "register": return <Register/>;
             break;
             case "login": return <Login/>; 
+            break;
+            case "index": return <Homepage/>;
+            break;
+            case "home": return <Homepage/>;
             break;
             case "recovery": return <Recovery/>; 
             break;
